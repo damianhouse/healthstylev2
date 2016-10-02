@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
   get 'general/welcome'
   resources :conversations, only: [:new, :create, :show, :index]
   devise_for :users

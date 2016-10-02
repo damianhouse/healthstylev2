@@ -18,10 +18,12 @@ class ConversationsController < ApplicationController
       render 'new'
     end
   end
+  
   def show
     @conversation = Conversation.includes(:messages).find_by(id: params[:id])
-
+    @message = Message.new
   end
+
   private
 
   def conversation_params
