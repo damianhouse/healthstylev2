@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161002175522) do
+ActiveRecord::Schema.define(version: 20161002181955) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer  "user_id"
@@ -20,11 +20,11 @@ ActiveRecord::Schema.define(version: 20161002175522) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.integer  "usconversation_id"
+    t.integer  "conversation_id"
     t.integer  "user_id"
-    t.string   "body"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.text     "body"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "users", force: :cascade do |t|
