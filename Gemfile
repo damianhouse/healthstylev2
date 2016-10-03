@@ -13,8 +13,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
-# Perform background jobs
-gem 'resque', "~> 1.22.0"
 # Use bootstrap for the grid system/standard styling
 gem 'bootstrap'
 # Use devise for authentication and standard views/mailers
