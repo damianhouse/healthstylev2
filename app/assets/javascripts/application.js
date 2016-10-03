@@ -15,3 +15,5 @@
 //= require jquery_ujs
 //= require cable
 //= require turbolinks
+//= require_tree ./channels
+//= require general
