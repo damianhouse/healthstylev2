@@ -2,7 +2,7 @@ class ConversationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @conversations = Conversation.all
+    @conversations = Conversation.where('user_id = ? OR coach_id = ?', current_user.id, current_user.id)
   end
 
   def new
@@ -18,7 +18,7 @@ class ConversationsController < ApplicationController
       render 'new'
     end
   end
-  
+
   def show
     @conversation = Conversation.includes(:messages).find_by(id: params[:id])
     @message = Message.new

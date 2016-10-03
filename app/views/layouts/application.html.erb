@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Healthstylev2</title>
+    <title>CableChat</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,12 +9,26 @@
   </head>
 
   <body>
-    <div class="container-fluid">
-      <div class="text-center">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-      </div>
+  <div class="container-fluid">
+    <div class="col-sm-12">
+    <nav class="navbar navbar-dark bg-inverse">
+      <%= link_to 'MyHealthStyleApp', root_path, class: 'navbar-brand' %>
+
+      <% if user_signed_in? %>
+        <ul class="nav navbar-nav pull-xs-right">
+          <li class="nav-item">
+            <span class="text-muted">Logged in as <strong><%= current_user.email %></strong></span>
+          </li>
+          <li class="nav-item active">
+            <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+          </li>
+        </ul>
+      <% end %>
+    </nav>
+
       <%= yield %>
     </div>
+  </div>
+
   </body>
 </html>

@@ -14,7 +14,7 @@ jQuery(document).on 'turbolinks:load', ->
 
       disconnected: ->
         # Called when the subscription has been terminated by the server
-
+ 
       received: (data) ->
         messages.append data['message']
         messages_to_bottom()
