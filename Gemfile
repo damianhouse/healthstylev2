@@ -15,6 +15,9 @@ gem 'coffee-rails', '~> 4.2'
 gem 'therubyracer', platforms: :ruby
 # Use bootstrap for the grid system/standard styling
 gem 'bootstrap'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end
 # Use devise for authentication and standard views/mailers
 gem 'devise'
 # Use jquery as the JavaScript library
