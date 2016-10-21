@@ -1,11 +1,12 @@
 <h1><%= @conversation.user.email %></h1>
 
-<div id="messages" data-conversation-id="<%= @conversation.id %>">
+<div id="messages" data-conversation-id="<%= @conversation.id %>" data-current-user-id="<%= @current_user_id %>">
   <%= render @conversation.messages %>
 </div>
 
 <%= form_for @message, url: '#' do |f| %>
-<%= hidden_field_tag 'conversation_id', @conversation.id %>
+  <%= hidden_field_tag 'conversation_id', @conversation.id %>
+
   <div class="form-group">
     <%= f.label :body %>
     <%= f.text_area :body, class: 'form-control' %>

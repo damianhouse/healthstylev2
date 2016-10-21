@@ -8,6 +8,6 @@ class ConversationsChannel < ApplicationCable::Channel
   end
 
   def send_message(data)
-    current_user.messages.create!(body: data['message'], conversation_id: data['conversation_id'])
+    MessageBroadcastJob.perform_later data
   end
 end

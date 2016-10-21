@@ -22,6 +22,7 @@ class ConversationsController < ApplicationController
   def show
     @conversation = Conversation.includes(:messages).find_by(id: params[:id])
     @message = Message.new
+    @current_user_id = current_user.id
   end
 
   private
