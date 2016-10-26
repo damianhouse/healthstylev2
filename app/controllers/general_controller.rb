@@ -3,6 +3,7 @@ class GeneralController < ApplicationController
   end
 
   def our_coaches
+    @coaches = User.where('role = ?', "Coach")
   end
 
   def testimonials
