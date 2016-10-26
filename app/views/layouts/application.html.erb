@@ -6,29 +6,26 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="p:domain_verify" content="86506f23d5e55f6dbe1434256eb60afc"/>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <script src="//load.sumome.com/" data-sumo-site-id="b086048ec9ea6218a358eab8f2cfa0e8dd277b5bd918e31755eb3e1f0522629c" async="async"></script>
   </head>
 
-  <body>
-  <div class="container-fluid">
-    <div class="col-sm-12">
-    <nav class="navbar navbar-dark bg-inverse">
-      <%= link_to 'MyHealthStyleApp', root_path, class: 'navbar-brand' %>
-
-      <% if user_signed_in? %>
-        <ul class="nav navbar-nav pull-xs-right">
-          <li class="nav-item">
-            <span class="text-muted">Logged in as <strong><%= current_user.email %></strong></span>
-          </li>
-          <li class="nav-item active">
-            <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
-          </li>
-        </ul>
-      <% end %>
-    </nav>
-
-      <%= yield %>
+  <body class="healthstyle">
+    <div class="container-fluid content">
+      <%= render 'layouts/nav_bar' %>
+      <div class="col-sm-12" style="margin-top:40px;">
+        <%= yield %>
+      </div>
+      <div class="text-center">
+        <% if user_signed_in? %>
+        <br \>
+          <button class="btn sign-up-button"><%= link_to 'About Us', abouts_aboutus_path, class: "sign-up-text" %></button>
+        <% end %>
+      </div>
     </div>
-  </div>
-
   </body>
 </html>

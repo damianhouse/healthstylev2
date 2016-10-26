@@ -1,0 +1,55 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <% if user_signed_in? %>
+        <% if current_user.avatar != nil %>
+          <%= image_tag current_user.avatar, class: "nav-bar-avatar" %>
+        <% end %>
+      <% end %>
+      <%= link_to 'MyHealthStyle', new_user_session_path, class: "navbar-brand font-health" %>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <% if user_signed_in? %>
+          <% if is_coach?(current_user) %>
+            <li><%= link_to 'My Clients', conversations_path %></li>
+            <li><a href="https://myhealthstyleapp.wordpress.com/">Community</a></li>
+            <li><a href="/general/recipes">Instant Recipe</a></li>
+            <li><%= link_to 'My Profile', edit_user_registration_path %></li>
+            <li><td><%= link_to 'Logout', destroy_user_session_path, method: :delete %></td></li>
+          <% elsif is_admin?(current_user) %>
+            <li><%= link_to 'Welcome', general_welcome_path %></li>
+            <li><a href="https://myhealthstyleapp.wordpress.com/">Community</a></li>
+            <li><%= link_to 'Admin', admin_coaches_path %></li>
+            <li><%= link_to 'My Team', teams_index_path %></li>
+            <li><a href="/general/recipes">Instant Recipe</a></li>
+            <li><%= link_to 'My Profile', User.find(session[:user_id]) %></li>
+            <li><td><%= link_to 'Logout', destroy_user_session_path, method: :delete %></td></li>
+          <% else %>
+            <li><%= link_to 'Welcome', general_welcome_path %></li>
+            <li><a href="https://myhealthstyleapp.wordpress.com/">Community</a></li>
+            <li><%= link_to 'My Team', teams_index_path %></li>
+            <li><a href="/general/recipes">Instant Recipe</a></li>
+            <li><%= link_to 'My Profile', User.find(session[:user_id]) %></li>
+            <li><td><%= link_to 'Logout', destroy_user_session_path, method: :delete %></td></li>
+          <% end %>
+        <% else %>
+          <li><a href="/general/welcome">Welcome</a></li>
+          <li><a href="/general/our_coaches">Our Coaches</a></li>
+          <li><a href="/general/testimonials">Testimonials</a></li>
+          <li><a href="/general/about_us">About Us</a></li>
+          <li><a href="/general/recipes">Instant Recipe</a></li>
+          <li><a href="https://myhealthstyleapp.wordpress.com/">Community</a></li>
+          <li><%= link_to 'Sign In', new_user_session_path%></li>
+          <li><%= link_to 'Sign Up Now', new_user_registration_path%></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

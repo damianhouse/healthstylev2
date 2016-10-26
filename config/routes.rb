@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
+  root to: "general#welcome"
 
-  get 'general/welcome'
   resources :conversations, only: [:new, :create, :show, :index]
   devise_for :users
+
+  get 'general/welcome'
+  get 'general/our_coaches'
+  get 'general/testimonials'
+  get 'general/recipes'
+  get 'general/about_us'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: "general#welcome"
 end

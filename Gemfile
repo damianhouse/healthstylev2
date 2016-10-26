@@ -14,10 +14,12 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 # Use bootstrap for the grid system/standard styling
-gem 'bootstrap'
+gem 'bootstrap-sass'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
+gem "font-awesome-rails"
+
 # Use devise for authentication and standard views/mailers
 gem 'devise'
 # Use jquery as the JavaScript library
