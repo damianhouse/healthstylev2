@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   get 'general/testimonials'
   get 'general/recipes'
   get 'general/about_us'
-
+  get 'general/terms'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
