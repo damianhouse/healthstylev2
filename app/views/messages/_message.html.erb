@@ -4,29 +4,25 @@
     <% if current_user_id == message.user_id %>
       <div class="row">
         <div class="col-md-1">
-          <%= gravatar_for message.user %>
         </div>
         <div class="col-md-11">
           <p class="card-text">
-            <span class="text-muted"><%= message.user.email %> at <%= message.timestamp %> says</span><br>
+            <span class="text-muted"> says</span><br>
             <%= message.body %>
-            <%= current_user_id %>
           </p>
         </div>
       </div>
     <% else %>
-      <div class="row">
-        <div class="col-md-11">
-          <p class="card-text">
-            <span class="text-muted"><%= message.user.email %> at <%= message.timestamp %> says</span><br>
-            <%= message.body %>
-            <%= current_user_id %>
-          </p>
-        </div>
-        <div class="col-md-1">
-          <%= gravatar_for message.user %>
-        </div>
+    <div class="row">
+      <div class="col-md-11">
+        <p class="card-text">
+          <span class="text-muted"> says</span><br>
+          <%= message.body %>
+        </p>
       </div>
+      <div class="col-md-1">
+      </div>
+    </div>
     <% end %>
   </div>
 </div>
