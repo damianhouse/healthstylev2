@@ -1,28 +1,18 @@
-<div class="card">
-  <div class="card-block">
-    <% current_user_id = @current_user_id if @current_user_id %>
-    <% if current_user_id == message.user_id %>
-      <div class="row">
-        <div class="col-md-1">
-        </div>
-        <div class="col-md-11">
-          <p class="card-text">
-            <span class="text-muted"> says</span><br>
-            <%= message.body %>
-          </p>
-        </div>
-      </div>
-    <% else %>
-    <div class="row">
-      <div class="col-md-11">
-        <p class="card-text">
-          <span class="text-muted"> says</span><br>
-          <%= message.body %>
-        </p>
-      </div>
-      <div class="col-md-1">
-      </div>
-    </div>
+<div id="messages" class="msg <%= current_user.id == message.user_id ? "send" : "receive" %>">
+  <div id="message_body" class="msgtext"><%= message.body.empty? ? raw("&nbsp;") : message.body.html_safe %></div>
+  <div id="<%= message.id %>" class="time">
+    <% if message == @conversation.messages.last %>
+      <% if message.user == current_user %>
+        <%= "Read " if message.read == true %>
+        <%= "Delivered " if message.read == false %>
+      <% end %>
+      <% if message.created_at >= DateTime.now.beginning_of_day %>
+        <%= message.updated_at.in_time_zone.localtime.strftime("%I:%M %p") %>
+      <% elsif message.created_at >= (DateTime.now - 7.days) %>
+        <%= message.updated_at.in_time_zone.localtime.strftime("%A %I:%M %p") %>
+      <% else %>
+        <%= message.updated_at.in_time_zone.localtime.strftime("%a, %b %d, %I:%M %p") %>
+      <% end %>
     <% end %>
   </div>
 </div>

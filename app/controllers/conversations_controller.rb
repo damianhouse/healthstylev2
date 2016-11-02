@@ -23,6 +23,8 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.includes(:messages).find_by(id: params[:id])
     @message = Message.new
     @current_user_id = current_user.id
+    @other_user = @conversation.user unless @conversation.user_id == @current_user_id
+    @other_user = User.find(@conversation.coach_id) unless @conversation.coach_id == @current_user_id
   end
 
   private

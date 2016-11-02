@@ -11,24 +11,68 @@ jQuery(document).on('turbolinks:load', function() {
       conversation_id: messages.data('conversation-id'),
       current_user_id: messages.data('current-user-id')
     }, {
-      connected: function() {},
+      connected: function(conversation_id, current_user_id) {
+        return this.perform('update_read', {
+          conversation_id: messages.data('conversation-id'),
+          current_user_id: messages.data('current-user-id')
+        });
+      },
       disconnected: function() {},
       received: function(data) {
-        var message = data["message"];
-        var current_user_id = messages.data('current-user-id');
-        var message_user_id = message.user_id;
-        console.log(current_user_id);
-        console.log(message.body);
-        console.log(message_user_id);
-        current_user_message = '<div class="card"><div class="card-block"><div class="row"><div class="col-md-1"></div><div class="col-md-11"><p class="card-text"><span class="text-muted"> says</span><br>'+ message.body +'</p></div></div></div></div>';
-        console.log(current_user_message);
-        other_user_message = '<div class="card"><div class="card-block"><div class="row"><div class="col-md-11"><p class="card-text"><span class="text-muted"> says</span><br>'+ message.body +'</p></div><div class="col-md-1"></div></div></div></div>';
-        if (current_user_id === message_user_id) {
-          $("#messages").append(current_user_message);
-        } else {
-          $("#messages").append(other_user_message);
+        console.log(JSON.stringify(data));
+        const current_user_id = messages.data('current-user-id');
+        if (data["messages"] !== undefined && data["messages"].constructor === Array) {
+          updatedMessages = data["messages"];
+          messagesUpdate(updatedMessages);
+        } else if (data !== null) {
+          message = data["message"];
+          current_user_id: messages.data('current-user-id');
+          messageAppend(message, current_user_id);
+        };
+
+        function messagesUpdate(updatedMessages) {
+          updatedMessages.map(function (message) {
+            if (message !== updatedMessages[updatedMessages.length - 1]) {
+              $('.received').text("");
+            } else {
+                if (message.read === true && message.user_id === current_user_id) {
+                  var date = new Date(message.updated_at);
+                  var time = date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+                  $('#'+ message.id +'').text("Read "+ time);
+                } else if (message.user_id === current_user_id) {
+                  var date = new Date(message.updated_at);
+                  var time = date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+                  $('#'+ message.id +'').text("Delivered "+ time);
+                }
+              }
+              return;
+          });
         }
-        return messages_to_bottom();
+
+        function checkReadStatus(message) {
+          if (message.read === "true") {
+            return "Read "
+          } else {
+            return "Delivered "
+          }
+        }
+
+        function messageAppend(message, current_user_id) {
+          console.log(message);
+          message_user_id = message.user_id;
+          date = new Date(message.updated_at);
+          time = date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+          readStatus = checkReadStatus(message);
+          current_user_message = '<div id="messages" class="msg send"><div id="message_body" class="msgtext">'+ message.body +'</div><div id="'+ message.id +'" class="time">'+ time +'</div></div>';
+          other_user_message = '<div id="messages" class="msg receive"><div id="message_body" class="msgtext">'+ message.body +'</div><div id="'+ message.id +'" class="time ">'+ time +'</div></div>';
+          if (current_user_id === message_user_id) {
+            $("#messages").append(current_user_message);
+          } else {
+            $("#messages").append(other_user_message);
+          }
+          return messages_to_bottom();
+        }
+
       },
       send_message: function(message, conversation_id, current_user_id) {
         return this.perform('send_message', {

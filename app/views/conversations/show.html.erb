@@ -1,7 +1,8 @@
-<h1><%= @conversation.user.email %></h1>
+<h1 class="text-center"><%= @other_user.email %></h1>
 
-<div id="messages" data-conversation-id="<%= @conversation.id %>" data-current-user-id="<%= @current_user_id %>">
-  <%= render @conversation.messages %>
+
+<div id="messages" class="conversation chat" data-conversation-id="<%= @conversation.id %>" data-current-user-id="<%= @current_user_id %>">
+  <%= render @conversation.messages.order('created_at ASC') %>
 </div>
 
 <%= form_for @message, url: '#' do |f| %>

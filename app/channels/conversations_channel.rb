@@ -10,4 +10,8 @@ class ConversationsChannel < ApplicationCable::Channel
   def send_message(data)
     MessageBroadcastJob.perform_later data
   end
+
+  def update_read(data)
+    MessageUpdateBroadcastJob.perform_later data
+  end
 end
