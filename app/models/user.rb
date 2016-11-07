@@ -5,4 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :conversations, dependent: :destroy
   has_many :messages, dependent: :destroy
+  after_create :send_welcome_email
+
+  def send_welcome_email
+    UserMailer.welcome(current_user)
+  end
 end
