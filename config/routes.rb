@@ -3,8 +3,7 @@ Rails.application.routes.draw do
   root to: "general#welcome"
 
   resources :conversations, only: [:new, :create, :show, :index]
-  devise_for :users
-
+  devise_for :users, :controllers => { :registrations => "registrations" }
   get 'general/welcome'
   get 'general/our_coaches'
   get 'general/testimonials'
