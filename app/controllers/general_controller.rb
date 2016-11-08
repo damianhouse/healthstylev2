@@ -10,6 +10,7 @@ class GeneralController < ApplicationController
   end
 
   def recipes
+    @recipe = Recipe.new.random_recipe
   end
 
   def about_us
