@@ -1,0 +1,2 @@
+json.extract! user, :id, :first_name, :last_name, :avatar, :approved, :is_admin, :is_coach, :email, :primary_coach, :secondary_coaches, :greeting, :philosophy, :created_at, :updated_at
+json.url user_url(user, format: :json)

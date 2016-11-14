@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>Avatar:</strong>
+  <%= @user.avatar %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @user.approved %>
+</p>
+
+<p>
+  <strong>Is admin:</strong>
+  <%= @user.is_admin %>
+</p>
+
+<p>
+  <strong>Is coach:</strong>
+  <%= @user.is_coach %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Primary coach:</strong>
+  <%= @user.primary_coach %>
+</p>
+
+<p>
+  <strong>Secondary coaches:</strong>
+  <%= @user.secondary_coaches %>
+</p>
+
+<p>
+  <strong>Greeting:</strong>
+  <%= @user.greeting %>
+</p>
+
+<p>
+  <strong>Philosophy:</strong>
+  <%= @user.philosophy %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
