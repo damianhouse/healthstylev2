@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
 
 
+
+resources :conversations
+resources :messages
+
+    root to: "users#index"
   mount ActionCable.server => '/cable'
   root to: "general#welcome"
 
   resources :conversations, only: [:new, :create, :show, :index]
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :users
-  
+
   get 'general/welcome'
   get 'general/our_coaches'
   get 'general/testimonials'
