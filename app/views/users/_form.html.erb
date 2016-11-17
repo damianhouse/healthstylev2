@@ -1,72 +1,8 @@
-<%= form_for(user) do |f| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :avatar %>
-    <%= f.text_field :avatar %>
-  </div>
-
-  <div class="field">
-    <%= f.label :approved %>
-    <%= f.check_box :approved %>
-  </div>
-
-  <div class="field">
-    <%= f.label :is_admin %>
-    <%= f.check_box :is_admin %>
-  </div>
-
-  <div class="field">
-    <%= f.label :is_coach %>
-    <%= f.check_box :is_coach %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :primary_coach %>
-    <%= f.number_field :primary_coach %>
-  </div>
-
-  <div class="field">
-    <%= f.label :secondary_coaches %>
-    <%= f.text_field :secondary_coaches %>
-  </div>
-
-  <div class="field">
-    <%= f.label :greeting %>
-    <%= f.text_area :greeting %>
-  </div>
-
-  <div class="field">
-    <%= f.label :philosophy %>
-    <%= f.text_area :philosophy %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= simple_form_for @user, defaults: { input_html: { class: 'default_class' } } do |f| %>
+  <%= f.input :first_name, label: 'Your first name please', error: 'Your first name is mandatory, please specify one' %>  <%= f.input :last_name, label: 'Your last name please', error: 'Your last name is mandatory, please specify one' %>
+  <%= f.input :email, input_html: { class: 'special' }, placeholder: 'user@domain.com' %>
+  <%= f.input :phone_number, input_html: { class: 'special' }, placeholder: '(999)9999999' %>
+  <%= f.input :greeting, input_html: { class: 'special'}, placeholder: "Your first message to users will say:" %>
+  <%= f.input :philosophy, input_html: { class: 'special'}, placeholder: "Your philosophy as a coach is:" %>
+  <%= f.button :submit %>
 <% end %>

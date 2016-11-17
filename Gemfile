@@ -19,6 +19,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
 gem "font-awesome-rails"
+gem 'simple_form'
 
 # Use devise for authentication and standard views/mailers
 gem 'devise'

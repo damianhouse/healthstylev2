@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161110155229) do
+ActiveRecord::Schema.define(version: 20161115164149) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer  "user_id"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20161110155229) do
     t.text     "philosophy"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "phone_number"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index [nil], name: "index_users_on_confirmation_token", unique: true

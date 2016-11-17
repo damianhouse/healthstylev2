@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :authenticate_admin!, only: {:index}
+  before_action :authenticate_admin!, only: [:index]
   # GET /users
   # GET /users.json
   def index
@@ -67,13 +67,13 @@ class UsersController < ApplicationController
     def set_user
       @user = User.find(params[:id])
     end
-
+    
     def authenticate_admin!
       redirect_to root_path unless current_user.is_admin
     end
-    
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :avatar, :approved, :is_admin, :is_coach, :email, :primary_coach, :secondary_coaches, :greeting, :philosophy)
+      params.require(:user).permit(:first_name, :last_name, :avatar, :approved, :is_admin, :is_coach, :email, :primary_coach, :secondary_coaches, :greeting, :philosophy, :phone_number)
     end
 end
