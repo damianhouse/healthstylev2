@@ -12,7 +12,6 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def notify_admin(user)
-    user = User.find_by(id: session[:user_id])
     unless user.phone_number == ""
       begin
         client = Twilio::REST::Client.new Rails.application.secrets.twilio_account_sid, Rails.application.secrets.twilio_auth_token
