@@ -35,6 +35,11 @@
   </p>
 
   <p>
+    <strong>Phone Number:</strong>
+    <%= @user.phone_number %>
+  </p>
+
+  <p>
     <strong>Email:</strong>
     <%= @user.email %>
   </p>
@@ -48,17 +53,17 @@
     <strong>Secondary coaches:</strong>
     <%= @user.secondary_coaches %>
   </p>
+  <% if @user.is_coach %>
+    <p>
+      <strong>Greeting:</strong>
+      <%= @user.greeting %>
+    </p>
 
-  <p>
-    <strong>Greeting:</strong>
-    <%= @user.greeting %>
-  </p>
-
-  <p>
-    <strong>Philosophy:</strong>
-    <%= @user.philosophy %>
-  </p>
-
+    <p>
+      <strong>Philosophy:</strong>
+      <%= @user.philosophy %>
+    </p>
+  <% end %>
   <%= link_to 'Edit', edit_user_path(@user) %> |
   <%= link_to 'Back', users_path %>
 </div>

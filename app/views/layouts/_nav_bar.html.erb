@@ -17,19 +17,19 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <% if user_signed_in? %>
-          <% if is_coach?(current_user) %>
+          <% if current_user.is_admin %>
+            <li><%= link_to 'Welcome', general_welcome_path %></li>
+            <li><a href="https://myhealthstyleapp.wordpress.com/">Community</a></li>
+            <li><%= link_to 'Admin', users_path %></li>
+            <li><%= link_to 'My Team', conversations_path %></li>
+            <li><a href="/general/recipes">Instant Recipe</a></li>
+            <li><%= link_to 'My Profile', current_user %></li>
+            <li><td><%= link_to 'Logout', destroy_user_session_path, method: :delete %></td></li>
+          <% elsif current_user.is_coach %>
             <li><%= link_to 'My Clients', conversations_path %></li>
             <li><a href="https://myhealthstyleapp.wordpress.com/">Community</a></li>
             <li><a href="/general/recipes">Instant Recipe</a></li>
             <li><%= link_to 'My Profile', edit_user_registration_path %></li>
-            <li><td><%= link_to 'Logout', destroy_user_session_path, method: :delete %></td></li>
-          <% elsif is_admin?(current_user) %>
-            <li><%= link_to 'Welcome', general_welcome_path %></li>
-            <li><a href="https://myhealthstyleapp.wordpress.com/">Community</a></li>
-            <li><%= link_to 'Admin', admin_coaches_path %></li>
-            <li><%= link_to 'My Team', conversations_path %></li>
-            <li><a href="/general/recipes">Instant Recipe</a></li>
-            <li><%= link_to 'My Profile', User.find(session[:user_id]) %></li>
             <li><td><%= link_to 'Logout', destroy_user_session_path, method: :delete %></td></li>
           <% else %>
             <li><%= link_to 'Welcome', general_welcome_path %></li>

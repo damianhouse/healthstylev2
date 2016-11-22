@@ -2,6 +2,8 @@
   <%= f.input :first_name, label: 'Your first name please', error: 'Your first name is mandatory, please specify one' %>  <%= f.input :last_name, label: 'Your last name please', error: 'Your last name is mandatory, please specify one' %>
   <%= f.input :email, input_html: { class: 'special' }, placeholder: 'user@domain.com' %>
   <%= f.input :phone_number, input_html: { class: 'special' }, placeholder: '(999)9999999' %>
+  <%= f.input :is_admin, label: "Admin" %>
+  <%= f.input :is_coach, label: "Coach" %>
   <% if @user.is_coach %>
     <%= f.input :greeting, input_html: { class: 'special'}, placeholder: "Your first message to users will say:" %>
     <%= f.input :philosophy, input_html: { class: 'special'}, placeholder: "Your philosophy as a coach is:" %>
