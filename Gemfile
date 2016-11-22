@@ -18,9 +18,12 @@ gem 'bootstrap-sass'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
+# Use font-awesome for fonts/icons
 gem "font-awesome-rails"
+# Use simple-form for the simplicity of forms and * beside for validations, also split forms
 gem 'simple_form'
-
+# Use Twilio for text messaging the user
+gem 'twilio-ruby', '~> 4.11.1'
 # Use devise for authentication and standard views/mailers
 gem 'devise'
 # Use jquery as the JavaScript library
