@@ -4,3 +4,13 @@
 #show-page-avatar {
   max-width: 450px;
 }
+#index-page-avatar {
+  max-width: 40px;
+}
+.table-items {
+  border: 1px solid black;
+}
+.index-table-header {
+  padding: 0 5px;
+  @extend .table-items
+}

@@ -5,5 +5,4 @@ class GeneralControllerTest < ActionDispatch::IntegrationTest
     get general_welcome_url
     assert_response :success
   end
-
 end
