@@ -11,6 +11,7 @@ class User < ApplicationRecord
   validates :greeting, presence: true, if: :is_coach?
   validates :philosophy, presence: true, if: :is_coach?
   validates_uniqueness_of :email, allow_blank: true
+  serialize :secondary_coaches
   
   private
 

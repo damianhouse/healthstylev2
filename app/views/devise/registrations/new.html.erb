@@ -22,7 +22,14 @@
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
-
+  <div class="field">
+    <%= f.label "Lead Coach" %><br />
+    <%= f.collection_select :primary_coach, User.where("is_coach = ? AND approved = ?", true, true), :id, :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label "Secondary Coaches (Choose two)" %><br />
+    <%= f.collection_check_boxes :secondary_coaches, User.where("is_coach = ? AND approved = ?", true, true), :id, :first_name %>
+  </div>
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
@@ -35,6 +42,7 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+
 <br />
   <div class="actions">
     <%= f.submit "Sign up" %>

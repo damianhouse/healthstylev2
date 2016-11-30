@@ -74,7 +74,7 @@
   </p>
   <p>
     <strong>Last Sign In At:</strong>
-    <%= @user.last_sign_in_at.strftime("%D %H:%M %P") %>
+    <%= @user.last_sign_in_at.strftime("%D %H:%M %P") unless @user.last_sign_in_at.nil? %>
   </p>
   <%= link_to 'Edit', edit_user_path(@user) %> |
   <%= link_to 'Back', users_path %>

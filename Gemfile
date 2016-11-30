@@ -18,6 +18,8 @@ gem 'bootstrap-sass'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
+# Use wicked for multi-step forms
+gem 'wicked'
 # Use font-awesome for fonts/icons
 gem "font-awesome-rails"
 # Use simple-form for the simplicity of forms and * beside for validations, also split forms
@@ -47,6 +49,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'sqlite3'
+  gem 'faker'
 end
 
 group :development do

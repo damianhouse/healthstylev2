@@ -2,7 +2,10 @@ class ConversationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @user = current_user
     @conversations = Conversation.where('user_id = ? OR coach_id = ?', current_user.id, current_user.id)
+    @primary_coach = User.find(current_user.primary_coach)
+    @secondary_coaches = @user.secondary_coaches.map {|coach| User.find(coach)}
   end
 
   def new

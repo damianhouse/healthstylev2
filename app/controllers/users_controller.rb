@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    session[:user] = nil
   end
 
   # GET /users/1/edit
@@ -25,8 +26,17 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-
+    case step
+    when :create_user
+      @user = User.new(user_params)
+      session[:user] = @user.attributes
+      redirect_to next_wizard_path
+    when :add_coaches
+      session[:user] = session[:user].merge(params[:user])
+      @user = User.new(session[:user])
+      @user.save
+      redirect_to user_path(@user)
+    end
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -62,8 +72,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def choose_coaches
+    @user = current_user
+    @coaches = User.where("is_coach = ? AND approved = ?", true, true)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
+    def finish_wizard_path
+      user_path(@user)
+    end
+
     def set_user
       @user = User.find(params[:id])
     end
