@@ -3,9 +3,14 @@ class ConversationsController < ApplicationController
 
   def index
     @user = current_user
-    @conversations = Conversation.where('user_id = ? OR coach_id = ?', current_user.id, current_user.id)
-    @primary_coach = User.find(current_user.primary_coach)
-    @secondary_coaches = @user.secondary_coaches.map {|coach| User.find(coach)}
+    if @user.is_coach
+      @coach = current_user
+      @primary_users = User.where("primary_coach = ?", @user.id)
+      @secondary_users = @user.secondary_users.map {|user| User.find(user)} if @user.secondary_users
+    else
+      @primary_coach = User.find(current_user.primary_coach)
+      @secondary_coaches = @user.secondary_coaches.map {|coach| User.find(coach)} if @user.secondary_coaches
+    end
   end
 
   def new

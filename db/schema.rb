@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115164149) do
+ActiveRecord::Schema.define(version: 20161130211929) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer  "user_id"
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 20161115164149) do
     t.datetime "updated_at",                      null: false
     t.boolean  "read",            default: false
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "coach_id"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["coach_id"], name: "index_notes_on_coach_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,6 +65,7 @@ ActiveRecord::Schema.define(version: 20161115164149) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone_number"
+    t.text     "secondary_users"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

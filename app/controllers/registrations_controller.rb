@@ -8,6 +8,15 @@ class RegistrationsController < Devise::RegistrationsController
     super
     # @user.secondary_coaches = params["user"]["secondary_coaches"].reject!(&:empty?)*","
     @user.secondary_coaches = params["user"]["secondary_coaches"].reject!(&:empty?).map {|n| n.to_i}
+    @user.secondary_coaches.each do |coach_id|
+      coach = User.find(coach_id)
+      if coach.secondary_users.nil?
+        coach.secondary_users = [@user.id]
+      else
+        coach.secondary_users << @user.id
+      end
+      coach.save!
+    end
     @user.save
     if @user.persisted?
       create_conversations(@user)

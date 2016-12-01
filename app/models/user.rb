@@ -12,14 +12,6 @@ class User < ApplicationRecord
   validates :philosophy, presence: true, if: :is_coach?
   validates_uniqueness_of :email, allow_blank: true
   serialize :secondary_coaches
-  
-  private
+  serialize :secondary_users
 
-    def is_coach?
-      self.is_coach
-    end
-
-    def is_admin?
-      self.is_admin
-    end
 end

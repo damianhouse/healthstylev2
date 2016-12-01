@@ -1,4 +1,4 @@
-<h1 class="text-center"><%= @other_user.email %></h1>
+<h1 class="text-center">Coach <%= @other_user.first_name%></h1>
 
 
 <div id="messages" class="conversation chat" data-conversation-id="<%= @conversation.id %>" data-current-user-id="<%= @current_user_id %>">
@@ -9,9 +9,7 @@
   <%= hidden_field_tag 'conversation_id', @conversation.id %>
 
   <div class="form-group">
-    <%= f.label :body %>
-    <%= f.text_area :body, class: 'form-control' %>
-    <small class="text-muted">From 2 to 1000 characters</small>
+    <%= f.text_area :body, class: 'form-control', placeholder: "Enter your message here" %>
   </div>
 
   <%= f.submit "Post", class: 'btn btn-primary btn-lg' %>
