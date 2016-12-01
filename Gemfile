@@ -18,6 +18,9 @@ gem 'bootstrap-sass'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
+
+gem "paperclip", "~> 5.0.0"
+gem 'aws-sdk', '~> 2'
 # Use wicked for multi-step forms
 gem 'wicked'
 # Use font-awesome for fonts/icons
