@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'subscriptions/new'
+  get 'subscriptions/create'
+  post 'subscriptions/create'
+
+  post "subscriptions/#{ENV["MHSWEBHOOK"]}" => 'subscriptions#webhook'
+
   resources :notes
   mount ActionCable.server => '/cable'
 

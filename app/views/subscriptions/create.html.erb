@@ -1,0 +1,36 @@
+<h3 class="text-center">Click "My Team" at the top and get to know your coaches.</h3>
+<p>
+  <label class="plan">
+    <span>Plan: <%= @plan %></span>
+  </label>
+</p>
+
+<% if @coupon.present? %>
+  <p>
+    <label class="subtotal">
+      <span>Subtotal: <%= number_to_currency(@amount * 0.01) %></span>
+    </label>
+  </p>
+  <p>
+    <label class="coupon">
+      <span>Coupon: <%= @coupon.code %></span>
+    </label>
+  </p>
+  <p>
+    <label class="savings">
+      <span>Savings: <%= number_to_currency(@discount_amount * 0.01) %></span>
+    </label>
+  </p>
+  <% if @coupon.discount_percent %>
+    <p>
+      <label class="discount">
+        <span>Discount: <%= @coupon.discount_percent_human %></span>
+      </label>
+    </p>
+  <% end %>
+<% end %>
+<p>
+  <label class="total">
+    <span>Total: <%= number_to_currency(@charge.amount * 0.01) %></span>
+  </label>
+</p>
