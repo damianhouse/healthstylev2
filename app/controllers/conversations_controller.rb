@@ -9,7 +9,7 @@ class ConversationsController < ApplicationController
       @secondary_users = User.where("secondary_coach = ? OR tertiary_coach = ?", @user.id, @user.id)
     else
       @primary_coach = User.find(current_user.primary_coach) if @user.primary_coach
-      @secondary_coaches = User.where("secondary_coach = ? OR tertiary_coach = ?", @user.secondary_coach, @user.tertiary_coach)
+      @secondary_coaches = User.where("id = ? OR id = ?", @user.secondary_coach, @user.tertiary_coach)
     end
   end
 

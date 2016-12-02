@@ -21,10 +21,11 @@ class RegistrationsController < Devise::RegistrationsController
     begin_conversation(user, user.tertiary_coach)
   end
 
-  def begin_conversation(user, coach)
-    @conversation = Conversation.new(user_id: user, coach_id: coach)
+  def begin_conversation(user, coach_id)
+    coach = User.find(coach_id)
+    @conversation = Conversation.new(user_id: user.id, coach_id: coach.id)
     @conversation.save!
-    @message = Message.new(conversation_id: @conversation, user_id: coach, body: coach.greeting)
+    @message = Message.new(conversation_id: @conversation.id, user_id: coach.id, body: coach.greeting)
     @message.save!
   end
 
