@@ -34,7 +34,12 @@
 
   <div class="field">
     <%= f.label "Secondary Coaches (Choose two)" %><br />
-    <%= f.collection_check_boxes :secondary_coaches, User.where("is_coach = ? AND approved = ?", true, true), :id, :first_name %>
+    <%= f.collection_check_boxes :secondary_coach, User.where("is_coach = ? AND approved = ?", true, true), :id, :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Secondary Coaches (Choose two)" %><br />
+    <%= f.collection_check_boxes :tertiary_coach, User.where("is_coach = ? AND approved = ?", true, true), :id, :first_name %>
   </div>
 
   <div class="field">

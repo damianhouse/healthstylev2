@@ -1,3 +1,4 @@
+<!-- Coach conversations until else -->
 <% if @user.is_coach %>
   <% if @primary_users.nil? && @secondary_users.nil? %>
     <p>Looks like you don't currently have any clients!</p>
@@ -91,7 +92,7 @@
       <% end %>
     </table>
   <% end %>
-
+<!-- User conversations below -->
 <% else %>
   <h1>Teams</h1>
 

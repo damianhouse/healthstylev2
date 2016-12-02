@@ -14,7 +14,8 @@
         <th class="text-center index-table-header">Is coach</th>
         <th class="text-center index-table-header">Email</th>
         <th class="text-center index-table-header">Primary coach</th>
-        <th class="text-center index-table-header">Secondary coaches</th>
+        <th class="text-center index-table-header">Secondary coach</th>
+        <th class="text-center index-table-header">Tertiary coach</th>
         <th class="text-center index-table-header">Greeting</th>
         <th class="text-center index-table-header">Philosophy</th>
         <th class="index-table-header" colspan="4"></th>
@@ -26,17 +27,18 @@
         <tr>
           <td class="table-items"><%= user.first_name %></td>
           <td class="table-items"><%= user.last_name %></td>
-          <% if user.avatar %>
+          <% if user.avatar.exists? %>
             <td class="table-items"><%= image_tag user.avatar, id: "index-page-avatar", class: "img-responsive" %></td>
           <% else %>
-            <td class="table-items"></td>
+            <td class="table-items"><%= image_tag 'generic_avatar.jpg', id: "index-page-avatar", class: "img-responsive" %></td>
           <% end %>
           <td class="table-items"><%= user.approved %></td>
           <td class="table-items"><%= user.is_admin %></td>
           <td class="table-items"><%= user.is_coach %></td>
           <td class="table-items"><%= user.email %></td>
           <td class="table-items"><%= user.primary_coach %></td>
-          <td class="table-items"><%= user.secondary_coaches %></td>
+          <td class="table-items"><%= user.secondary_coach %></td>
+          <td class="table-items"><%= user.tertiary_coach %></td>
           <td class="table-items"><%= user.greeting %></td>
           <td class="table-items"><%= user.philosophy %></td>
           <td class="table-items">

@@ -1,8 +1,10 @@
 <div class="text-center">
   <p id="notice"><%= notice %></p>
 
-  <% if @user.avatar %>
+  <% if @user.avatar.exists? %>
     <%= image_tag @user.avatar, id: "show-page-avatar", class: "img-responsive" %>
+  <% else %>
+    <%= image_tag 'generic_avatar.jpg', id: "show-page-avatar", class: "img-responsive" %>
   <% end %>
   <p>
     <strong>First name:</strong>
@@ -50,8 +52,10 @@
 
     <p>
       <strong>Secondary coaches:</strong>
-      <%= @user.secondary_coaches %>
+      <%= @user.secondary_coach %>
+      <%= @user.tertiary_coach %>
     </p>
+
     <% if @user.is_coach %>
       <p>
         <strong>Greeting:</strong>

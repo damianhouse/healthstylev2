@@ -6,10 +6,10 @@ class ConversationsController < ApplicationController
     if @user.is_coach
       @coach = current_user
       @primary_users = User.where("primary_coach = ?", @user.id)
-      @secondary_users = @user.secondary_users.map {|user| User.find(user)} if @user.secondary_users
+      @secondary_users = User.where("secondary_coach = ? OR tertiary_coach = ?", @user.id, @user.id)
     else
-      @primary_coach = User.find(current_user.primary_coach)
-      @secondary_coaches = @user.secondary_coaches.map {|coach| User.find(coach)} if @user.secondary_coaches
+      @primary_coach = User.find(current_user.primary_coach) if @user.primary_coach
+      @secondary_coaches = User.where("secondary_coach = ? OR tertiary_coach = ?", @user.secondary_coach, @user.tertiary_coach)
     end
   end
 

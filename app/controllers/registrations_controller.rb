@@ -6,18 +6,6 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     super
-    # @user.secondary_coaches = params["user"]["secondary_coaches"].reject!(&:empty?)*","
-    @user.secondary_coaches = params["user"]["secondary_coaches"].reject!(&:empty?).map {|n| n.to_i}
-    @user.secondary_coaches.each do |coach_id|
-      coach = User.find(coach_id)
-      if coach.secondary_users.nil?
-        coach.secondary_users = [@user.id]
-      else
-        coach.secondary_users << @user.id
-      end
-      coach.save!
-    end
-    @user.save
     if @user.persisted?
       create_conversations(@user)
       # UserMailer.welcome(@user).deliver
@@ -26,15 +14,18 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   private
+
   def create_conversations(user)
-    @coaches = user.secondary_coaches.map {|coach| User.find(coach)}
-    @coaches << User.find(user.primary_coach)
-    @coaches.each do |coach|
-      @conversation = Conversation.new(user_id: user.id, coach_id: coach.id)
-      @conversation.save!
-      @message = Message.new(conversation_id: @conversation.id, user_id: coach.id, body: coach.greeting)
-      @message.save!
-    end
+    begin_conversation(user, user.primary_coach)
+    begin_conversation(user, user.secondary_coach)
+    begin_conversation(user, user.tertiary_coach)
+  end
+
+  def begin_conversation(user, coach)
+    @conversation = Conversation.new(user_id: user, coach_id: coach)
+    @conversation.save!
+    @message = Message.new(conversation_id: @conversation, user_id: coach, body: coach.greeting)
+    @message.save!
   end
 
   def notify_admin(user)

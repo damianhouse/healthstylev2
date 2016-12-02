@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201195732) do
+ActiveRecord::Schema.define(version: 20161202191045) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer  "user_id"
@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(version: 20161201195732) do
     t.boolean  "is_coach",               default: false
     t.boolean  "is_admin",               default: false
     t.integer  "primary_coach"
-    t.text     "secondary_coaches"
     t.text     "greeting"
     t.text     "philosophy"
     t.string   "first_name"
@@ -70,8 +69,12 @@ ActiveRecord::Schema.define(version: 20161201195732) do
     t.string   "avatar_content_type"
     t.datetime "avatar_updated_at"
     t.integer  "avatar_file_size"
+    t.integer  "secondary_coach"
+    t.integer  "tertiary_coach"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["secondary_coach"], name: "index_users_on_secondary_coach"
+    t.index ["tertiary_coach"], name: "index_users_on_tertiary_coach"
   end
 
 end
