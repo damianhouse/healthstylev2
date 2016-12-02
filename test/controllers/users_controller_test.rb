@@ -37,15 +37,30 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to "/users", path
   end
 
-  test "should get edit" do
+  test "admin should be able to edit a user" do
     sign_in users(:admin)
-    get edit_user_url(users(:admin))
+    get edit_user_url(users(:user))
+    assert_response :success
+
+    put users_url, params: {user:{id: users(:user)}}
     assert_response :success
   end
 
-  test "should get update" do
+  test "admin should be able to edit a coach" do
     sign_in users(:admin)
-    put users_url, params: {user:{id: users(:admin)}}
+    get edit_user_url(users(:coach))
+    assert_response :success
+
+    put users_url, params: {user:{id: users(:coach)}}
+    assert_response :success
+  end
+
+  test "a coach can edit their information" do
+    sign_in users(:coach)
+    get edit_user_url(users(:coach))
+    assert_response :success
+
+    put users_url, params: {user:{id: users(:coach)}}
     assert_response :success
   end
 

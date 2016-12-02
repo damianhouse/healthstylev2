@@ -3,6 +3,7 @@ require 'test_helper'
 class NotesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @note = notes(:one)
+    @note2 = notes(:two)
   end
 
   test "should get index" do
@@ -35,7 +36,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
 
   test "should update note" do
     patch note_url(@note), params: { note: { body: @note.body, coach_id: @note.coach_id, user_id: @note.user_id } }
-    assert_redirected_to note_url(@note)
+    assert_response :success
   end
 
   test "should destroy note" do
