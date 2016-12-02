@@ -18,7 +18,9 @@ gem 'bootstrap-sass'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
-
+# Stripe is for payments and subscriptions
+gem 'stripe'
+# Paperclip and aws-sdk are for image uploads
 gem "paperclip", "~> 5.0.0"
 gem 'aws-sdk', '~> 2'
 # Use wicked for multi-step forms
