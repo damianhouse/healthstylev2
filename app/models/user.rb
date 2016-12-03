@@ -19,6 +19,40 @@ class User < ApplicationRecord
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/generic_avatar.jpg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\//
 
+  def add_time(plan, interval_count)
+    interval_count.to_i
+    unless plan.nil?
+      if expires_at.nil?
+        case plan
+        when "week"
+          self.expires_at = (DateTime.now + 1.week)
+          self.save!
+        when "month"
+          self.expires_at = (DateTime.now + (interval_count.month))
+          self.save!
+        when "year"
+          self.expires_at = (DateTime.now + 1.year)
+          self.save!
+        else
+          return
+        end
+      else
+        case plan
+        when "week"
+          self.expires_at += 1.week
+          self.save!
+        when "month"
+          self.expires_at += (interval_count.month)
+          self.save!
+        when "year"
+          self.expires_at += 6.month
+          self.save!
+        else
+          return
+        end
+      end
+    end
+  end
   private
 
   def all_coaches_unique
@@ -36,5 +70,11 @@ class User < ApplicationRecord
 
   def is_admin?
     self.is_admin
+  end
+
+  def user_expired?
+    if expires_at
+      expires_at > DateTime.now
+    end
   end
 end
