@@ -11,12 +11,13 @@ Rails.application.routes.draw do
   resources :conversations
   resources :messages
   resources :conversations, only: [:new, :create, :show, :index]
+  resources :form_steps
 
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :users
   root to: "general#welcome"
 
-  get 'users/choose_coaches'
+  get 'users/choose_coaches' => 'users#choose_coaches'
   get 'general/welcome'
   get 'general/our_coaches'
   get 'general/testimonials'

@@ -82,7 +82,7 @@ class SubscriptionsController < ApplicationController
     @current_user.stripe_id = customer.id
     @current_user.save!
     flash[:notice] = "Your subscription was successfully created."
-    
+
     rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to subscriptions_new_path
@@ -92,10 +92,11 @@ class SubscriptionsController < ApplicationController
     begin
       event_json = JSON.parse(request.body.read)
       event_object = event_json['data']['object']
+      user = User.find_by(stripe_id: event_object['customer'])
       #refer event types here https://stripe.com/docs/api#event_types
       case event_json['type']
         when 'invoice.payment_succeeded'
-          handle_success_invoice event_object
+          handle_success_invoice(user, event_object)
         when 'invoice.payment_failed'
           handle_failure_invoice event_object
         when 'charge.failed'
@@ -123,6 +124,10 @@ class SubscriptionsController < ApplicationController
 
   def apply_amount_discount(amount)
     amount - self.discount_amount
+  end
+
+  def handle_success_invoice(user, invoice)
+
   end
 
 end

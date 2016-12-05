@@ -2,14 +2,33 @@ class RegistrationsController < Devise::RegistrationsController
 
   def new
     super
+    session[:user_params] ||= {}
+    @user = User.new(session[:user_params])
+    @current_step = "first_step"
+    @coaches = User.where("is_coach = ? AND approved = ?", true, true)
   end
 
   def create
     super
-    if @user.persisted?
-      create_conversations(@user)
-      # UserMailer.welcome(@user).deliver
-      # notify_admin(@user)
+    session[:user_params].deep_merge!(params[:user]) if params[:user]
+    @user = User.new(session[:user_params])
+    @user.status = session[:user_step]
+    @coaches = User.where("is_coach = ? AND approved = ?", true, true)
+    if @user.valid?
+      if params[:previous_button]
+        @user.previous_step
+      elsif @user.last_step?
+        @user.save if @user.all_coaches_choosen?
+        session[:user_step] = nil
+        session[:user_params] = nil
+        create_conversations(@user)
+        UserMailer.welcome(@user).deliver
+        notify_admin(@user)
+        redirect_to subscriptions_new_path
+      else
+        @user.next_step
+      end
+      session[:user_step] = @user.status
     end
   end
 

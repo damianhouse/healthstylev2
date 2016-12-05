@@ -6,16 +6,13 @@ class User < ApplicationRecord
   has_many :conversations, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :notes, dependent: :destroy
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :phone_number, presence: true
+  validates :first_name, :last_name, :phone_number, :terms_read, presence: true
   validates :greeting, presence: true, if: :is_coach?
   validates :philosophy, presence: true, if: :is_coach?
-  validates_uniqueness_of :email, allow_blank: true
   validates :primary_coach, presence: true, if: :is_user?
   validates :secondary_coach, presence: true, if: :is_user?
   validates :tertiary_coach, presence: true, if: :is_user?
-  validate :all_coaches_unique, if: :is_user?
+  validates_uniqueness_of :email, allow_blank: true
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/generic_avatar.jpg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\//
 
@@ -53,12 +50,69 @@ class User < ApplicationRecord
       end
     end
   end
-  private
 
-  def all_coaches_unique
+  def all_coaches_unique?
     coaches = [primary_coach, secondary_coach, tertiary_coach]
-    coaches.count == coaches.uniq.count
+    unique_coaches = coaches.uniq
+    coaches == unique_coaches
   end
+
+  def active?
+    status == 'active'
+  end
+
+  def steps
+    %w[first_step second_step]
+  end
+
+  def current_step
+    @current_step ||= steps.first
+  end
+
+  def first_step?
+    current_step == "first_step"
+  end
+
+  def second_step?
+    current_step == "second_step"
+  end
+
+  def next_step
+    self.current_step = steps[steps.index(current_step)+1]
+  end
+
+  def previous_step
+    self.current_step = steps[steps.index(current_step)-1]
+  end
+
+  def last_step?
+    self.current_step == steps.last
+  end
+
+  def all_valid?
+    steps.all? do |step|
+      self.current_step = step
+      valid?
+    end
+  end
+
+  def validate_primary_coach
+    self.primary_coach.present?
+  end
+
+  def validate_secondary_coach
+    self.secondary_coach.present?
+  end
+
+  def validate_tertiary_coach
+    self.tertiary_coach.present?
+  end
+
+  def all_coaches_choosen?
+    true if validate_primary_coach && validate_secondary_coach && validate_tertiary_coach
+  end
+
+  private
 
   def is_user?
     is_admin == false && is_coach == false

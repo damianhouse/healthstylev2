@@ -1,60 +1,26 @@
-<h2>Sign up</h2>
+<div class="text-center">
+  <h1 class="text-center">Sign Up Steps:</h1>
+  <h2 class="text-center"><strong>1 . .</strong> 2 . . 3</h2>
+   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :post, class: 'form-horizontal' }) do |f| %>
+   <%= devise_error_messages! %>
 
- <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :post, class: 'form-horizontal' }) do |f| %>
- <%= devise_error_messages! %>
+   <% if @user.errors.any? %>
+     <div id="error_explanation">
+       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
+       <ul>
+       <% @user.errors.full_messages.each do |message| %>
+         <li><%= message %></li>
+       <% end %>
+       </ul>
+     </div>
+   <% end %>
+   <% if @user.current_step == "second_step" %>
+     <%= render "coach_personas" %>
+   <% end %>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :phone_number %><br />
-    <%= f.text_field :phone_number %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-  <div class="field">
-    <%= f.label :avatar, "Upload Profile Pic" %><br>
-    <%= f.file_field :avatar %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Lead Coach" %><br />
-    <%= f.collection_select :primary_coach, User.where("is_coach = ? AND approved = ?", true, true), :id, :first_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Secondary Coaches (Choose two)" %><br />
-    <%= f.collection_select :secondary_coach, User.where("is_coach = ? AND approved = ?", true, true), :id, :first_name %>
-    <%= f.collection_select :tertiary_coach, User.where("is_coach = ? AND approved = ?", true, true), :id, :first_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-<br />
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+   <%= render "#{@user.current_step}_form", f: f  %>
+   <%= render "buttons", f: f %>
+  <%= render "devise/shared/links" %>
+  <% end %>
+</div>

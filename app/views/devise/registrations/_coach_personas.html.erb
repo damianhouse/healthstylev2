@@ -1,0 +1,19 @@
+<div class="col-sm-12">
+  <h1 class="text-center">Sign Up Steps:</h1>
+  <h2 class="text-center"><strong>1 . . 2 . .</strong> 3</h2>
+  <p>
+    <%= flash[:error] unless flash[:error].blank? %>
+  </p>
+  <p class="text-center">Build your team! Choose your Lead Coach to work with you everyday and two Team Coaches who will work with you on specific habits/bevaviors.</p>
+  <% @coaches.each do |coach| %>
+      <% if coach.approved %>
+        <div class="text-center each-coach col-sm-12 col-md-4 col-lg-3">
+          <h3><%= coach.first_name %></h3>
+          <% if coach.avatar.present? %>
+          <img src="<%= coach.avatar %>" class="img-responsive">
+          <% end %>
+          <p><%= coach.philosophy %></p>
+        </div>
+      <% end %>
+  <% end %>
+</div>

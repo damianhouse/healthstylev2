@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_filter :setup_wizard, only: :choose_coaches
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :authenticate_admin!, only: [:index]
@@ -16,7 +17,6 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    session[:user] = nil
   end
 
   # GET /users/1/edit
@@ -26,21 +26,11 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    case step
-    when :create_user
-      @user = User.new(user_params)
-      session[:user] = @user.attributes
-      redirect_to next_wizard_path
-    when :add_coaches
-      session[:user] = session[:user].merge(params[:user])
-      @user = User.new(session[:user])
-      @user.save
-      redirect_to user_path(@user)
-    end
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
+        create_conversations(@user)
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -51,6 +41,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    @user.update_attributes(user_params)
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -72,16 +63,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def choose_coaches
-    @user = current_user
-    @coaches = User.where("is_coach = ? AND approved = ?", true, true)
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
-    def finish_wizard_path
-      user_path(@user)
-    end
 
     def set_user
       @user = User.find(params[:id])
