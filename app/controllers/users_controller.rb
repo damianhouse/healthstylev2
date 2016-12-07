@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :admin_edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_coaches, only: [:new, :edit, :update]
   before_action :authenticate_user!
-  before_action :authenticate_admin!, only: [:index]
+  before_action :authenticate_admin!, only: [:index, :create, :new]
+  before_action :authenticate_user_or_admin!, only: [:edit, :update]
   # GET /users
   # GET /users.json
   def index
@@ -16,7 +18,6 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    @coaches = User.where("is_coach = ? AND approved = ?", true, true)
   end
 
   # GET /users/1/edit
@@ -32,10 +33,16 @@ class UsersController < ApplicationController
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
-        create_conversations(@user)
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+      if @user.save
+        create_conversations(@user)
+        if Rails.env == 'production'
+          UserMailer.welcome(@user).deliver
+          notify_admin(@user)
+        end
       end
     end
   end
@@ -66,9 +73,16 @@ class UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_coaches
+      @coaches = User.where("is_coach = ? AND approved = ?", true, true)
+    end
 
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def authenticate_user_or_admin!
+      redirect_to root_path unless current_user.is_admin || @user == current_user
     end
 
     def authenticate_admin!
@@ -77,6 +91,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :avatar, :approved, :is_admin, :is_coach, :email, :primary_coach, :secondary_coach, :tertiary_coach, :greeting, :philosophy, :phone_number, :password, :password_confirmation, :terms)
+      params.require(:user).permit(:first_name, :last_name, :avatar, :approved, :is_admin, :is_coach, :email, :primary_coach, :secondary_coach, :tertiary_coach, :greeting, :philosophy, :phone_number, :password, :password_confirmation, :terms_read, :expires_at)
     end
 end

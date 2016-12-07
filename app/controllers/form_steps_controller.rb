@@ -17,8 +17,10 @@ class FormStepsController < ApplicationController
     render_wizard @user
     if @user.persisted?
       create_conversations(@user)
-      # UserMailer.welcome(@user).deliver
-      # notify_admin(@user)
+      if Rails.env == 'production'
+        UserMailer.welcome(@user).deliver
+        notify_admin(@user)
+      end
     end
   end
 

@@ -1,23 +1,22 @@
-<%= simple_form_for @user, defaults: { input_html: { class: 'default_class' } } do |f| %>
+<%= simple_form_for @user, defaults: { input_html: { class: 'default_class' }, multipart: true } do |f| %>
   <%= f.input :first_name, label: 'Your first name please', error: 'Your first name is mandatory, please specify one' %>  <%= f.input :last_name, label: 'Your last name please', error: 'Your last name is mandatory, please specify one' %>
   <%= f.input :email, input_html: { class: 'special' }, placeholder: 'user@domain.com' %>
-  <%= f.input :phone_number, input_html: { class: 'special' }, placeholder: '(999)9999999' %>
-  <%= f.input :password %>
-  <%= f.input :password_confirmation, hint: 'Same as password' %>
+  <%= f.input :phone_number, input_html: { class: 'special' }, placeholder: '9999999999' %>
   <%= f.hidden_field :terms_read, required: true, value: true %>
-  <%= f.input :expires_at, as: :date, start_day: Date.today,
+  <%= f.input :expires_at, as: :datetime, start_day: Date.today,
                             order: [:month, :day, :year] %>
+  <%= f.label :avatar, "Upload Profile Pic" %><br>
+  <%= f.file_field :avatar %>
   <%= f.label 'Primary Coach' %>
   <%= f.collection_select :primary_coach, @coaches, :id, :first_name %></br>
   <%= f.label 'Secondary Coaches' %>
   <%= f.collection_select :secondary_coach, @coaches, :id, :first_name %>
   <%= f.collection_select :tertiary_coach, @coaches, :id, :first_name %>
-
   <%= f.input :is_admin, label: "Admin" %>
   <%= f.input :is_coach, label: "Coach" %>
-  <h3>If the user you are creating is going to be a coach you have to fill in these:</h3>
+  <h3 class="text-center">If the user you are creating is going to be a coach you have to fill in these:</h3>
   <%= f.input :greeting, input_html: { class: 'special'}, placeholder: "Your first message to users will say:" %>
   <%= f.input :philosophy, input_html: { class: 'special'}, placeholder: "Your philosophy as a coach is:" %>
-  <%= f.input :approved, input_html: { class: 'special'}, placeholder: "Coach is approved for users:" %>
+  <%= f.input :approved, input_html: { class: 'special'}, label: "Check this box if you are approving the coach for users. (Immediately the coach will be available as a selection to users)" %>
   <%= f.button :submit %>
 <% end %>

@@ -9,8 +9,9 @@
 </div>
 
 <div class="field">
-  <%= f.label :phone_number %><br />
-  <%= f.text_field :phone_number %>
+  <%= f.label :phone_number %>*<br>
+  <%= f.telephone_field :phone_number, required: true, pattern: '^\d{10}$', placeholder: "Mobile Number", title: "format: xxxxxxxxxx" %>
+  <p class="smalltext">(Please enter in the format: xxxxxxxxxx (no spaces, dashes, etc.))</p>
 </div>
 
 <div class="field">
@@ -40,4 +41,8 @@
   <%= f.check_box :terms_read, required: true %>
   <%= f.label "I have read and agree to the"%>
   <%= link_to "Terms of Use and Terms of Service", general_terms_path, target: '_blank' %>
+</div>
+
+<div class="actions">
+  <%= f.submit "Sign up", class: "btn btn-success" %>
 </div>
