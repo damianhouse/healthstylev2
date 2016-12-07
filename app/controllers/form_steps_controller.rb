@@ -26,6 +26,10 @@ class FormStepsController < ApplicationController
 
   private
 
+  def is_user?
+    true unless current_user.is_admin || current_user.is_coach
+  end
+
   def coaches_choosen?
     render_wizard unless current_user.all_coaches_choosen?
   end

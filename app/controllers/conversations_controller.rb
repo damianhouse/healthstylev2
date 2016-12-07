@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :coaches_choosen?
-  before_action :user_expired?
+  before_action :coaches_choosen?, if: :is_user?
+  before_action :user_expired?, if: :is_user?
 
   def index
     @user = current_user
@@ -39,8 +39,16 @@ class ConversationsController < ApplicationController
 
   private
 
+  def is_user?
+    true unless current_user.is_admin || current_user.is_coach
+  end
+
   def coaches_choosen?
-    redirect_to form_steps_path if current_user.all_coaches_choosen?
+    if current_user.is_admin || current_user.is_coach
+      true
+    elsif current_user.all_coaches_choosen?
+      redirect_to form_steps_path
+    end
   end
 
   def user_expired?
