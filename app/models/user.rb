@@ -9,9 +9,6 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :phone_number, :terms_read, presence: true
   validates :greeting, presence: true, if: :is_coach?
   validates :philosophy, presence: true, if: :is_coach?
-  validates :primary_coach, presence: true, if: :is_user?
-  validates :secondary_coach, presence: true, if: :is_user?
-  validates :tertiary_coach, presence: true, if: :is_user?
   validates_uniqueness_of :email, allow_blank: true
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/generic_avatar.jpg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\//
@@ -109,10 +106,8 @@ class User < ApplicationRecord
   end
 
   def all_coaches_choosen?
-    true if validate_primary_coach && validate_secondary_coach && validate_tertiary_coach
+    true unless validate_primary_coach && validate_secondary_coach && validate_tertiary_coach
   end
-
-  private
 
   def is_user?
     is_admin == false && is_coach == false
@@ -126,9 +121,12 @@ class User < ApplicationRecord
     self.is_admin
   end
 
-  def user_expired?
+  def expired?
     if expires_at
-      expires_at > DateTime.now
+      false if expires_at > DateTime.now
+    else
+      true
     end
   end
+
 end

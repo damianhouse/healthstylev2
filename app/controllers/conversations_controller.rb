@@ -1,5 +1,7 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
+  before_action :coaches_choosen?
+  before_action :user_expired?
 
   def index
     @user = current_user
@@ -36,6 +38,14 @@ class ConversationsController < ApplicationController
   end
 
   private
+
+  def coaches_choosen?
+    redirect_to form_steps_path if current_user.all_coaches_choosen?
+  end
+
+  def user_expired?
+    redirect_to subscriptions_new_path if current_user.expired?
+  end
 
   def conversation_params
     params.require(:conversation).permit(:user_id, :coach_id)

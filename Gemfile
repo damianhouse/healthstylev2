@@ -55,6 +55,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'sqlite3'
   gem 'faker'
+  gem 'rails-footnotes', '~> 4.0'
 end
 
 group :development do

@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
       conversations_path
     elsif resource.status == 'active'
       conversations_path
+    elsif resource.all_coaches_choosen?
+      form_steps_path
+    elsif resource.expired?
+      subscriptions_new_path
     else
       form_steps_path
     end
