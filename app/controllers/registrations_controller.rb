@@ -2,14 +2,6 @@ class RegistrationsController < Devise::RegistrationsController
   respond_to :json
   prepend_before_action :require_no_authentication, only: [:cancel ]
 
-  def new
-    super
-  end
-
-  def create
-    super
-  end
-
   protected
 
   def sign_up(resource_name, resource)
