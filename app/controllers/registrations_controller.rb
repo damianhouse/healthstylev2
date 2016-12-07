@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+  respond_to :json
+  prepend_before_action :require_no_authentication, only: [:cancel ]
 
   def new
     super
@@ -6,5 +8,11 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     super
+  end
+
+  protected
+
+  def sign_up(resource_name, resource)
+    sign_in(resource_name, resource) unless current_user
   end
 end

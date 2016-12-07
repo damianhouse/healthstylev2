@@ -7,8 +7,6 @@ class ApplicationController < ActionController::Base
       users_path
     elsif resource.is_coach
       conversations_path
-    elsif resource.status == 'active'
-      conversations_path
     elsif resource.all_coaches_choosen?
       form_steps_path
     elsif resource.expired?

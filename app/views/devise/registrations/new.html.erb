@@ -15,12 +15,8 @@
        </ul>
      </div>
    <% end %>
-   <% if @user.current_step == "second_step" %>
-     <%= render "coach_personas" %>
-   <% end %>
 
-   <%= render "#{@user.current_step}_form", f: f  %>
-   <%= render "buttons", f: f %>
+   <%= render "form", f: f  %>
   <%= render "devise/shared/links" %>
   <% end %>
 </div>

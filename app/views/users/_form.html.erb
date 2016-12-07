@@ -2,12 +2,22 @@
   <%= f.input :first_name, label: 'Your first name please', error: 'Your first name is mandatory, please specify one' %>  <%= f.input :last_name, label: 'Your last name please', error: 'Your last name is mandatory, please specify one' %>
   <%= f.input :email, input_html: { class: 'special' }, placeholder: 'user@domain.com' %>
   <%= f.input :phone_number, input_html: { class: 'special' }, placeholder: '(999)9999999' %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation, hint: 'Same as password' %>
+  <%= f.hidden_field :terms_read, required: true, value: true %>
+  <%= f.input :expires_at, as: :date, start_day: Date.today,
+                            order: [:month, :day, :year] %>
+  <%= f.label 'Primary Coach' %>
+  <%= f.collection_select :primary_coach, @coaches, :id, :first_name %></br>
+  <%= f.label 'Secondary Coaches' %>
+  <%= f.collection_select :secondary_coach, @coaches, :id, :first_name %>
+  <%= f.collection_select :tertiary_coach, @coaches, :id, :first_name %>
+
   <%= f.input :is_admin, label: "Admin" %>
   <%= f.input :is_coach, label: "Coach" %>
-  <% if @user.is_coach %>
-    <%= f.input :greeting, input_html: { class: 'special'}, placeholder: "Your first message to users will say:" %>
-    <%= f.input :philosophy, input_html: { class: 'special'}, placeholder: "Your philosophy as a coach is:" %>
-    <%= f.input :approved, input_html: { class: 'special'}, placeholder: "Coach is approved for users:" %>
-  <% end %>
+  <h3>If the user you are creating is going to be a coach you have to fill in these:</h3>
+  <%= f.input :greeting, input_html: { class: 'special'}, placeholder: "Your first message to users will say:" %>
+  <%= f.input :philosophy, input_html: { class: 'special'}, placeholder: "Your philosophy as a coach is:" %>
+  <%= f.input :approved, input_html: { class: 'special'}, placeholder: "Coach is approved for users:" %>
   <%= f.button :submit %>
 <% end %>
