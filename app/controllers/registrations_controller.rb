@@ -12,7 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     super
     if current_user.is_admin
-      create_conversations(@user) if @user.all_coaches_choosen?
+      create_conversations(@user) unless @user.is_admin || @user.is_coach
       if Rails.env == 'production'
         UserMailer.welcome(@user).deliver
       end
