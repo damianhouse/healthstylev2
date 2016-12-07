@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  skip_before_filter :setup_wizard, only: :choose_coaches
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :authenticate_admin!, only: [:index]
