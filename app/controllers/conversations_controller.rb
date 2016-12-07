@@ -5,7 +5,9 @@ class ConversationsController < ApplicationController
 
   def index
     @user = current_user
-    if @user.is_coach
+    if @user.is_admin
+      @primary_users = Conversation.all
+    elsif @user.is_coach
       @coach = current_user
       @primary_users = User.where("primary_coach = ?", @user.id)
       @secondary_users = User.where("secondary_coach = ? OR tertiary_coach = ?", @user.id, @user.id)
