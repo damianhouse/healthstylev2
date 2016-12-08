@@ -1,10 +1,16 @@
 
-<div class="welcome">
-  <span id="mobileshow" class="three-coaches text-center"><h2><span class="tagline">3 Coaches, 1 Goal:</span> A Healthier You!</h2></span>
-  <span id="desktopshow" class="three-coaches text-center"><h1>3 Coaches, 1 Goal: A Healthier You!<br/></h1></span>
+<div class="welcome text-center">
+  <span id="mobileshow" class="three-coaches"><h2 class="orange-font mobile"><span class="tagline">3 COACHES</span></h2></span>
+  <span id="mobileshow" class="three-coaches"><h1 class="orange-font mobile larger-letters"><span class="tagline">1 GOAL</span></h2></span>
+  <span id="mobileshow" class="three-coaches"><h2 class="orange-font mobile"><span class="tagline">A HEALTHIER YOU!</span></h2></span>
 
-  <%= image_tag "HS_Logo_B3_LO.jpg", class: "main-image" %>
-
+  <span id="desktopshow" class="three-coaches"><h1 class="orange-font">3 Coaches, 1 Goal: A Healthier You!<br/></h1></span>
+  <div id="mobileshow">
+    <%= image_tag "HS_Logo_B3_LO.jpg", class: "img-responsive" %>
+  </div>
+  <div id="desktopshow">
+    <%= image_tag "HS_Logo_B3_LO.jpg", class: "main-image desktopshow" %>
+  </div>
   <div class="text-center tagline">
 
     <span id="desktopshow" class="text-center"><h2>Long-term behavioral coaching via mobile<br/></h2></span><br/>

@@ -11,6 +11,16 @@
 .learn-more-button {
   padding-bottom: 5px;
 }
+.orange-font {
+  color: #FF6600;
+  font-weight: bold;
+  &.mobile {
+    font-size: 10vw;
+    &.larger-letters {
+      font-size: 20vw;
+    }
+  }
+}
 
 .img-responsive {
   display: block;
@@ -67,7 +77,7 @@ div.h2 span.tagline {
   display:inline-block;
   margin-bottom:5px;
   white-space: nowrap;
-  font-size:6.1vw;
+  font-size:20vw;
   color: #FF6600;
   font-weight: bold;
 }
