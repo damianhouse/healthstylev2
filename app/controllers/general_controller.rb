@@ -3,7 +3,7 @@ class GeneralController < ApplicationController
   end
 
   def our_coaches
-    @coaches = User.where('role = ?', "Coach")
+    @coaches = User.where("is_coach = ? AND approved = ?", true, true)
   end
 
   def testimonials
