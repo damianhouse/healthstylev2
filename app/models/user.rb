@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :greeting, presence: true, if: :is_coach?
   validates :philosophy, presence: true, if: :is_coach?
   validates_uniqueness_of :email, allow_blank: true
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/generic_avatar.jpg"
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>", original: {convert_options: '-auto-orient'} }, default_url: "/images/generic_avatar.jpg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\//
 
   def add_time(plan, interval_count)
