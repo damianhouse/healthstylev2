@@ -41,7 +41,7 @@
             <% unless user.is_admin || user.is_coach %>
               <% if user.expires_at %>
                 <% u = user.expires_at %>
-                <%= (u.today? ? "#{u.hour}:#{u.min}" : "#{u.month}/#{u.day}/#{u.year}" ) if u > DateTime.now %><strong><%= "Expired!" if u < DateTime.now %></strong>
+                <%= (u.today? ? u.time : u.date ) if u > DateTime.now %><strong><%= "Expired!" if u < DateTime.now %></strong>
               <% end %>
             <% end %>
           </td>
