@@ -40,8 +40,7 @@
           <td class="table-items">
             <% unless user.is_admin || user.is_coach %>
               <% if user.expires_at.present? %>
-                <% u = user.expires_at %>
-                <%= (u.today? ? u.time : u.date ) if u > DateTime.now %><strong><%= "Expired!" if u < DateTime.now %></strong>
+                <%= (user.expires_at.today? ? user.expires_at.strftime("%H:%M %p") : user.expires_at.strftime("%m/%d/%Y")) if user.expires_at.utc > DateTime.now.utc %><strong><%= "Expired!" if user.expires_at < DateTime.now %></strong>
               <% end %>
             <% end %>
           </td>
