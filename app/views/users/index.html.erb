@@ -37,7 +37,11 @@
           <td class="table-items"><%= user.is_admin %></td>
           <td class="table-items"><%= user.is_coach %></td>
           <td class="table-items"><%= user.email %></td>
-          <td class="table-items"><%= (user.expires_at.to_date == Date.today ? user.expires_at.strftime("%I:%M %p") : user.expires_at.strftime("%m/%d/%y")) if user.expires_at && user.expires_at.to_date > DateTime.now %><strong><%= "Expired!" if user.expires_at && user.expires_at.to_date < Date.today %></strong></td>
+          <td class="table-items">
+            <% unless user.is_admin || user.is_coach %>
+              <%= (user.expires_at.to_date == Date.today ? user.expires_at.strftime("%I:%M %p") : user.expires_at.strftime("%m/%d/%y")) if user.expires_at && user.expires_at.to_date > DateTime.now %><strong><%= "Expired!" if user.expires_at && user.expires_at.to_date < Date.today %></strong>
+            <% end %>
+          </td>
           <td class="table-items"><%= user.primary_coach %></td>
           <td class="table-items"><%= user.secondary_coach %></td>
           <td class="table-items"><%= user.tertiary_coach %></td>
