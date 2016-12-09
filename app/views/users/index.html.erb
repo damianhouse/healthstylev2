@@ -39,7 +39,7 @@
           <td class="table-items"><%= user.email %></td>
           <td class="table-items">
             <% unless user.is_admin || user.is_coach %>
-              <% if user.expires_at %>
+              <% if user.expires_at.present? %>
                 <% u = user.expires_at %>
                 <%= (u.today? ? u.time : u.date ) if u > DateTime.now %><strong><%= "Expired!" if u < DateTime.now %></strong>
               <% end %>
