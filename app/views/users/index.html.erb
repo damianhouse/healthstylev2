@@ -10,9 +10,10 @@
         <th class="text-center index-table-header">Last name</th>
         <th class="text-center index-table-header">Avatar</th>
         <th class="text-center index-table-header">Approved</th>
-        <th class="text-center index-table-header">Is admin</th>
-        <th class="text-center index-table-header">Is coach</th>
+        <th class="text-center index-table-header">Admin</th>
+        <th class="text-center index-table-header">Coach</th>
         <th class="text-center index-table-header">Email</th>
+        <th class="text-center index-table-header">Expires at</th>
         <th class="text-center index-table-header">Primary coach</th>
         <th class="text-center index-table-header">Secondary coach</th>
         <th class="text-center index-table-header">Tertiary coach</th>
@@ -36,6 +37,7 @@
           <td class="table-items"><%= user.is_admin %></td>
           <td class="table-items"><%= user.is_coach %></td>
           <td class="table-items"><%= user.email %></td>
+          <td class="table-items"><%= (user.expires_at.to_date == Date.today ? user.expires_at.strftime("%I:%M %p") : user.expires_at.strftime("%m/%d/%y")) if user.expires_at  %></td>
           <td class="table-items"><%= user.primary_coach %></td>
           <td class="table-items"><%= user.secondary_coach %></td>
           <td class="table-items"><%= user.tertiary_coach %></td>

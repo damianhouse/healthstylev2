@@ -7,8 +7,10 @@
                             order: [:month, :day, :year] %>
   <%= f.label :avatar, "Upload Profile Pic" %><br>
   <%= f.file_field :avatar %>
-  <%= f.input :password %>
-  <%= f.input :password_confirmation %>
+  <% if action_name == 'new' %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+  <% end %>
   <%= f.label 'Primary Coach' %>
   <%= f.collection_select :primary_coach, @coaches, :id, :first_name, include_blank: true %></br>
   <%= f.label 'Secondary Coaches' %>

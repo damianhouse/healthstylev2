@@ -1,27 +1,27 @@
 nav.messages {
-  background:#fcfcfc;
-  border-bottom:1px solid #eee;
-  margin:0 -15px;
-  padding:0 8px;
+  background: #fcfcfc;
+  border-bottom: 1px solid #eee;
+  margin: 0 -15px;
+  padding: 0 8px;
 }
 nav.messages div.nav {
-  padding-top:10px;
+  padding-top: 10px;
 }
 nav.messages div.nav div.details {
-  text-align:right;
+  text-align: right;
 }
 nav.messages div.nav div.name {
-  font-weight:bold;
-  font-size:1.1em;
+  font-weight: bold;
+  font-size: 1.1em;
 }
 nav.messages li {
-  line-height:1.5em;
-  vertical-align:middle;
+  line-height: 1.5em;
+  vertical-align: middle;
 }
 nav.messages .fa {
   font-size:1.8em;
-  font-weight:bold;
-  display:inline-block;
+  font-weight: bold;
+  display: inline-block;
 }
 nav.messages span {
   position:relative;
@@ -35,23 +35,23 @@ div.chat div.time {
   text-align:right;
 }
 div.chat {
-  background:#fff;
-  margin:8px 0 0;
-  position:relative;
-  padding:15px 8px 5px;
-  margin:0 -15px;
+  background: #fff;
+  margin: 8px 0 0;
+  position: relative;
+  padding: 15px 8px 5px;
+  margin: 0 -15px;
 }
 div.chat div.msgtext-right {
-  text-align:right;
-  right:0;
+  text-align: right;
+  right: 0;
 }
 div.chat div.msgtext {
-  position:relative;
-  display:inline-block;
-  padding:6px 12px;
-  margin:0;
-  border-radius:1em;
-  background:#ccc;
+  position: relative;
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 0;
+  border-radius: 1em;
+  background: #ccc;
 }
 div.chat div.msg {
   position:relative;
@@ -146,4 +146,7 @@ div.sendmsg div.actions input {
   font-weight:bold;
   font-size:2.2vh;
   display:inline-block;
+}
+#receive {
+  background: #38e51d !important;
 }

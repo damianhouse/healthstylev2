@@ -14,8 +14,10 @@ Rails.application.routes.draw do
   resources :form_steps
 
   devise_for :users, :controllers => { :registrations => "registrations" }
-  
-  resources :users
+  scope '/admin' do
+    resources :users
+  end
+
   root to: "general#welcome"
 
   get 'users/choose_coaches' => 'users#choose_coaches'

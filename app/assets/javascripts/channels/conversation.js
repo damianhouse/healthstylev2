@@ -64,7 +64,7 @@ jQuery(document).on('turbolinks:load', function() {
           time = date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
           readStatus = checkReadStatus(message);
           current_user_message = '<div id="messages" class="msg send"><div id="message_body" class="msgtext">'+ message.body +'</div><div id="'+ message.id +'" class="time">'+ time +'</div></div>';
-          other_user_message = '<div id="messages" class="msg receive"><div id="message_body" class="msgtext">'+ message.body +'</div><div id="'+ message.id +'" class="time ">'+ time +'</div></div>';
+          other_user_message = '<div id="messages receive" class="msg receive"><div id="message_body" class="msgtext">'+ message.body +'</div><div id="'+ message.id +'" class="time ">'+ time +'</div></div>';
           if (current_user_id === message_user_id) {
             $("#messages").append(current_user_message);
           } else {
