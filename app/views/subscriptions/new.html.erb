@@ -1,9 +1,11 @@
 <h1 class="text-center">Sign Up Steps:</h1>
 <h1 class="text-center"><strong>1 . . 2 . . 3</strong></h1>
 <div class="text-center">
-  <% flash.each do |key, value| %>
-    <%= content_tag :h3, value, class: "flash #{key} text-center" %>
-  <% end %>
+  <h3 class="flash-notice">
+    <% flash.each do |type, msg| %>
+     <%= content_tag :p, msg, class: type %>
+    <% end %>
+  </h3>
   <h3>Thanks for signing up! Your account was successfully created!</h3>
 
   <h3>Before we assign the coaches you selected, please choose a subscription plan:</h3>

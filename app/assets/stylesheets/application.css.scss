@@ -20,7 +20,11 @@
  @import 'font-awesome';
  @import 'bootswatch';
  @import 'users';
- 
+
+ .flash-notice {
+   text-weight: bold;
+   color: red;
+ }
  .text-center {
    text-align: center;
  }
