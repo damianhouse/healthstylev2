@@ -2,8 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_coaches, only: [:new, :edit, :update]
   before_action :authenticate_user!
-  before_action :authenticate_admin!, only: [:index, :create, :new]
-  before_action :authenticate_user_or_admin!, only: [:edit, :update]
+  before_action :authenticate_admin!
   # GET /users
   # GET /users.json
   def index
@@ -79,10 +78,6 @@ class UsersController < ApplicationController
 
     def set_user
       @user = User.find(params[:id])
-    end
-
-    def authenticate_user_or_admin!
-      redirect_to root_path unless current_user.is_admin || @user == current_user
     end
 
     def authenticate_admin!

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :conversations, only: [:new, :create, :show, :index]
   resources :form_steps
 
-  devise_for :users, :controllers => { :registrations => "registrations" }
+  devise_for :users, controllers: { registrations: "registrations" }
   scope '/admin' do
     resources :users
   end
