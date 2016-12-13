@@ -1,4 +1,4 @@
-<% @primary_users.each do |user| %>
+<% @users.each do |user| %>
   <% user_convos = user.conversations.where(coach_id: @coach.id) %>
   <tr>
     <td class="title">
