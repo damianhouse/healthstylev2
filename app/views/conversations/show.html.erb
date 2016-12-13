@@ -1,5 +1,4 @@
-<h1 class="text-center">Coach <%= @other_user.first_name%></h1>
-
+<%= render 'conversation_nav_bar' %>
 
 <div id="messages" class="conversation chat" data-conversation-id="<%= @conversation.id %>" data-current-user-id="<%= @current_user_id %>">
   <%= render @conversation.messages.order('created_at ASC') %>

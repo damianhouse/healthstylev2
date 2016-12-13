@@ -1,0 +1,13 @@
+<nav class="messages navbar navbar-static">
+  <div class="container-fluid" style="padding:0 1px;">
+    <div class="nav row">
+      <div class="col-xs-4"><a href="<%= conversations_path %>"><i class="fa fa-angle-left"></i><span>My Team</span></a></div>
+      <% if @current_user.is_coach %>
+        <div class="col-xs-4 name text-center"><%= @other_user.first_name%></div>
+      <% else %>
+        <div class="col-xs-4 name text-center">Coach <%= @other_user.first_name%></div>
+      <% end %>
+      <div class="col-xs-4 details"><%= link_to 'View Profile', @profile %></div>
+    </div>
+  </div>
+</nav>

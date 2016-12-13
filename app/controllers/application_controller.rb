@@ -7,15 +7,13 @@ class ApplicationController < ActionController::Base
       users_path
     elsif current_user.is_coach
       conversations_path
-    elsif current_user.all_coaches_choosen?
+    elsif current_user.all_coaches_choosen? || current_user.expired?
       form_steps_path
-    elsif current_user.expired?
-      subscriptions_new_path
     else
-      form_steps_path
+      conversations_path
     end
   end
-  
+
   def create_conversations(user)
     begin_conversation(user, user.primary_coach)
     begin_conversation(user, user.secondary_coach)
