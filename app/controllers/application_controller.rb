@@ -38,6 +38,22 @@ class ApplicationController < ActionController::Base
       flash[:notice] =  "Please enter a valid phone number."
     end
   end
+
+  def notify_user(user)
+    unless user.phone_number == ""
+      begin
+        client = Twilio::REST::Client.new Rails.application.secrets.twilio_account_sid, Rails.application.secrets.twilio_auth_token
+        message = client.messages.create from: '8284820730', to: user.phone_number,
+
+        body: 'Welcome to MyHealthStyle! We are so excited and will contact you as soon as your coaching team is assigned to you!'
+      rescue
+        flash[:notice] =  "Please enter a valid phone number."
+      end
+    else
+      redirect_to charges_new_path
+    end
+  end
+  
   protected
 
   def configure_permitted_parameters

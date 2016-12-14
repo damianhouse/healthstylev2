@@ -39,8 +39,7 @@ class UsersController < ApplicationController
       if @user.save
         create_conversations(@user)
         if Rails.env == 'production'
-          UserMailer.welcome(@user).deliver
-          notify_admin(@user)
+          UserMailer.welcome(@user).deliver_now
         end
       end
     end
