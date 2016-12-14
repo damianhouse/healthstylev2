@@ -1,7 +1,7 @@
 <div class="text-center">
   <p><%= Time.now.strftime("%A %B %d, %Y") %></p>
 
-  <h2>Hi <%= @user.email %>. Welcome To MyHealthStyle!</h2>
+  <h2>Hi <%= @user_name %>. Welcome To MyHealthStyle!</h2>
 
   <p>We are thrilled you’ve chosen to partner with MyHealthStyle, Inc. In the next few days and weeks, you
   will join a trusted community of kind, supportive coaches and health-oriented peers who all have one
@@ -27,5 +27,6 @@
   <p>Your Team at MyHealthStyle, Inc.</p>
 
   <p><a href="http://www.myhealthstyleapp.com/abouts/terms">Click here for Terms of Use and Terms of Service.</a></p>
-  <%= image_tag "Healthstyle.jpg" %>
-</div>
+  <div>
+    <%= image_tag attachments['photo.jpg'].url, class: "email-logo" %>
+  </div>
