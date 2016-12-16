@@ -9,9 +9,4 @@ class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get create" do
-    sign_in users(:user)
-    get subscriptions_create_url
-    assert_response :success
-  end
 end

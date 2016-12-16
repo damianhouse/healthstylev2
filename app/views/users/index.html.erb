@@ -23,42 +23,43 @@
       </tr>
     </thead>
 
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td class="table-items"><%= user.first_name %></td>
-          <td class="table-items"><%= user.last_name %></td>
-          <% if user.avatar.exists? %>
-            <td class="table-items"><%= image_tag user.avatar, id: "index-page-avatar", class: "img-responsive" %></td>
-          <% else %>
-            <td class="table-items"><%= image_tag 'generic_avatar.jpg', id: "index-page-avatar", class: "img-responsive" %></td>
-          <% end %>
-          <td class="table-items"><%= user.approved %></td>
-          <td class="table-items"><%= user.is_admin %></td>
-          <td class="table-items"><%= user.is_coach %></td>
-          <td class="table-items"><%= user.email %></td>
-          <td class="table-items">
-            <% unless user.is_admin || user.is_coach %>
-              <% if user.expires_at.present? %>
-                <%= (user.expires_at.today? ? user.expires_at.strftime("%H:%M %p") : user.expires_at.strftime("%m/%d/%Y")) if user.expires_at.utc > DateTime.now.utc %><strong><%= "Expired!" if user.expires_at < DateTime.now %></strong>
-              <% end %>
+    <% unless @users.nil? %>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td class="table-items"><%= user.first_name %></td>
+            <td class="table-items"><%= user.last_name %></td>
+            <% if user.avatar.exists? %>
+              <td class="table-items"><%= image_tag user.avatar, id: "index-page-avatar", class: "img-responsive" %></td>
+            <% else %>
+              <td class="table-items"><%= image_tag 'generic_avatar.jpg', id: "index-page-avatar", class: "img-responsive" %></td>
             <% end %>
-          </td>
-          <td class="table-items"><%= user.primary_coach %></td>
-          <td class="table-items"><%= user.secondary_coach %></td>
-          <td class="table-items"><%= user.tertiary_coach %></td>
-          <td class="table-items"><%= truncate(user.greeting, length: 80) %></td>
-          <td class="table-items"><%= truncate(user.philosophy, length: 80) %></td>
-          <td class="table-items">
-            <%= link_to 'Show', user %>
-            <%= link_to 'Edit', edit_user_path(user) %>
-            <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
+            <td class="table-items"><%= user.approved %></td>
+            <td class="table-items"><%= user.is_admin %></td>
+            <td class="table-items"><%= user.is_coach %></td>
+            <td class="table-items"><%= user.email %></td>
+            <td class="table-items">
+              <% unless user.is_admin || user.is_coach %>
+                <% if user.expires_at.present? %>
+                  <%= (user.expires_at.today? ? user.expires_at.strftime("%H:%M %p") : user.expires_at.strftime("%m/%d/%Y")) if user.expires_at.utc > DateTime.now.utc %><strong><%= "Expired!" if user.expires_at < DateTime.now %></strong>
+                <% end %>
+              <% end %>
+            </td>
+            <td class="table-items"><%= user.primary_coach %></td>
+            <td class="table-items"><%= user.secondary_coach %></td>
+            <td class="table-items"><%= user.tertiary_coach %></td>
+            <td class="table-items"><%= truncate(user.greeting, length: 80) %></td>
+            <td class="table-items"><%= truncate(user.philosophy, length: 80) %></td>
+            <td class="table-items">
+              <%= link_to 'Show', user %>
+              <%= link_to 'Edit', edit_user_path(user) %>
+              <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
   <br>
 
   <%= link_to 'New User', new_user_path %>

@@ -16,9 +16,28 @@ coach:
   first_name: Shirley
   last_name: Temple
   email: shirleytemple@gmail.com
+  greeting: I love apples and cherries.
+  philosophy: I love candy and cheese.
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   is_coach: true
-
+#
+coach2:
+  first_name: Tracy
+  last_name: Merica
+  email: tracymerica@gmail.com
+  greeting: I love apples and cherries.
+  philosophy: I love candy and cheese.
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  is_coach: true
+#
+coach3:
+  first_name: Megan
+  last_name: Canada
+  email: megancanada@gmail.com
+  greeting: I love apples and cherries.
+  philosophy: I love candy and cheese.
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  is_coach: true
 #
 user:
   first_name: Adam
