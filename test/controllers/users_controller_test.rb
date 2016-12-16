@@ -10,7 +10,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "admin should get index" do
     sign_in users(:admin)
     get users_url
-    assert_equal "/users", path
+    assert_equal "/admin/users", path
   end
 
   test "guest shouldn't get index" do
@@ -19,9 +19,9 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "coach shouldn't get index" do
-    post '/users/sign_in', params: {user:{email: @coach.email, password: @coach.password}}
+    sign_in users(:coach)
     get users_url
-    assert_redirected_to "/users/sign_in", path
+    assert_redirected_to "/", path
   end
 
   test "admin should get new" do
@@ -34,7 +34,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:admin)
     post users_url, params: {user:{first_name: "Travis", last_name: "Apples", email: "apples@gmail.com", encrypted_password: Devise::Encryptor.digest(User, 'password'), phone_number: "9999999999"}}
 
-    assert_redirected_to "/users", path
+    assert_redirected_to "/admin/users", path
   end
 
   test "admin should be able to edit a user" do
@@ -48,10 +48,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "admin should be able to edit a coach" do
     sign_in users(:admin)
-    get edit_user_url(users(:coach))
+    get edit_user_url(users(:coach).id)
     assert_response :success
 
-    put users_url, params: {user:{id: users(:coach)}}
+    put edit_user_url(users(:coach).id), params: {user:{id: users(:coach)}}
     assert_response :success
   end
 
@@ -66,7 +66,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should get destroy" do
     sign_in users(:admin)
-    delete "/users/#{users(:admin).id}"
-    assert_redirected_to "/users"
+    delete "/admin/users/#{users(:admin).id}"
+    assert_redirected_to "/admin/users"
   end
 end

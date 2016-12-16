@@ -47,8 +47,8 @@
           <td class="table-items"><%= user.primary_coach %></td>
           <td class="table-items"><%= user.secondary_coach %></td>
           <td class="table-items"><%= user.tertiary_coach %></td>
-          <td class="table-items"><%= user.greeting %></td>
-          <td class="table-items"><%= user.philosophy %></td>
+          <td class="table-items"><%= truncate(user.greeting, length: 80) %></td>
+          <td class="table-items"><%= truncate(user.philosophy, length: 80) %></td>
           <td class="table-items">
             <%= link_to 'Show', user %>
             <%= link_to 'Edit', edit_user_path(user) %>

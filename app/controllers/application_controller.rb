@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
         client = Twilio::REST::Client.new Rails.application.secrets.twilio_account_sid, Rails.application.secrets.twilio_auth_token
         message = client.messages.create from: '8284820730', to: user.phone_number,
 
-        body: 'Welcome to MyHealthStyle! We are so excited and will contact you as soon as your coaching team is assigned to you!'
+        body: 'Welcome to MyHealthStyle! Your coaches are waiting for you! Please go to your dashboard and tell them all about you! Check back often for their responses, they may live in a different time zone'
       rescue
         flash[:notice] =  "Please enter a valid phone number."
       end
@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
       redirect_to charges_new_path
     end
   end
-  
+
   protected
 
   def configure_permitted_parameters
