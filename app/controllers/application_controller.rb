@@ -54,6 +54,27 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def notify_coach(user, coach)
+    unless coach.phone_number == ""
+      begin
+        client = Twilio::REST::Client.new Rails.application.secrets.twilio_account_sid, Rails.application.secrets.twilio_auth_token
+        message = client.messages.create from: '8284820730', to: coach.phone_number,
+
+        body: "#{user.first_name user.last_name} added you as a coach! www.myhealthstyleapp.com/conversations.com"
+      rescue
+        flash[:notice] =  "Please enter a valid phone number."
+      end
+    else
+      redirect_to charges_new_path
+    end
+  end
+
+  def notify_coaches(user)
+    notify_coach(user, Coach.find(user.primary_coach))
+    notify_coach(user, Coach.find(user.secondary_coach))
+    notify_coach(user, Coach.find(user.tertiary_coach))
+  end
+
   protected
 
   def configure_permitted_parameters

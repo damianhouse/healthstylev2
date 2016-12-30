@@ -13,6 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
     super
     if @user.save
       notify_admin(@user)
+      notify_coaches(@user)
       UserMailer.welcome(@user).deliver_now
     end
   end
