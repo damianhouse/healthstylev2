@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   mount StripeEvent::Engine => "/#{ENV["MHSWEBHOOK"]}"
-  get 'subscriptions/new'
-  get 'subscriptions/create'
-  post 'subscriptions/create'
 
+  root to: "general#welcome"
+  
   resources :notes
   resources :conversations
   resources :messages
@@ -17,8 +16,9 @@ Rails.application.routes.draw do
     resources :users
   end
 
-  root to: "general#welcome"
-
+  get 'subscriptions/new'
+  get 'subscriptions/create'
+  post 'subscriptions/create'
   get 'users/choose_coaches' => 'users#choose_coaches'
   get 'general/welcome'
   get 'general/our_coaches'

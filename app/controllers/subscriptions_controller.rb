@@ -1,5 +1,4 @@
 class SubscriptionsController < ApplicationController
-  protect_from_forgery except: :webhook
   before_action :authenticate_user!, only: [:new, :create]
 
   def new
@@ -92,6 +91,4 @@ class SubscriptionsController < ApplicationController
   def apply_amount_discount(amount)
     amount - self.discount_amount
   end
-
-
 end
