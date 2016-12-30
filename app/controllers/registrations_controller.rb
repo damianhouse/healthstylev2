@@ -12,7 +12,6 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     super
     if @user.save
-      notify_user(@user)
       notify_admin(@user)
       UserMailer.welcome(@user).deliver_now
     end

@@ -48,29 +48,6 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  def webhook
-    begin
-      event_json = JSON.parse(request.body.read)
-      event_object = event_json['data']['object']
-      user = User.find_by(stripe_id: event_object['customer'])
-      #refer event types here https://stripe.com/docs/api#event_types
-      case event_json['type']
-        when 'invoice.payment_succeeded'
-          handle_success_invoice(user, event_object)
-        when 'invoice.payment_failed'
-          handle_failure_invoice event_object
-        when 'charge.failed'
-          handle_failure_charge event_object
-        when 'customer.subscription.deleted'
-        when 'customer.subscription.updated'
-      end
-    rescue Exception => ex
-      render :json => {:status => 422, :error => "Webhook call failed"}
-      return
-    end
-    render :json => {:status => 200}
-  end
-
   private
 
   def is_valid?(coupon, plan_interval, interval_count)
@@ -115,5 +92,6 @@ class SubscriptionsController < ApplicationController
   def apply_amount_discount(amount)
     amount - self.discount_amount
   end
+
 
 end

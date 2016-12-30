@@ -48,6 +48,41 @@ class User < ApplicationRecord
     end
   end
 
+  def remove_time(plan, interval_count)
+    interval_count.to_i
+    unless plan.nil?
+      if expires_at.nil?
+        case plan
+        when "week"
+          self.expires_at = (DateTime.now - 1.week)
+          self.save!
+        when "month"
+          self.expires_at = (DateTime.now - (interval_count.month))
+          self.save!
+        when "year"
+          self.expires_at = (DateTime.now - 1.year)
+          self.save!
+        else
+          return
+        end
+      else
+        case plan
+        when "week"
+          self.expires_at -= 1.week
+          self.save!
+        when "month"
+          self.expires_at -= (interval_count.month)
+          self.save!
+        when "year"
+          self.expires_at -= 6.month
+          self.save!
+        else
+          return
+        end
+      end
+    end
+  end
+
   def all_coaches_unique?
     coaches = [primary_coach, secondary_coach, tertiary_coach]
     unique_coaches = coaches.uniq

@@ -1,20 +1,18 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+  mount StripeEvent::Engine => "/#{ENV["MHSWEBHOOK"]}"
   get 'subscriptions/new'
   get 'subscriptions/create'
   post 'subscriptions/create'
 
-  post "subscriptions/#{ENV["MHSWEBHOOK"]}" => 'subscriptions#webhook'
-
   resources :notes
-  mount ActionCable.server => '/cable'
-
   resources :conversations
   resources :messages
   resources :conversations, only: [:new, :create, :show, :index]
   resources :form_steps
 
   devise_for :users, controllers: { registrations: "registrations" }
-  
+
   scope '/admin' do
     resources :users
   end

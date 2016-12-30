@@ -13,10 +13,10 @@
   <% end %>
   <%= f.label 'Primary Coach' %>
   <% if @coaches %>
-  <%= f.collection_select :primary_coach, @coaches, :id, :first_name, include_blank: true %></br>
-  <%= f.label 'Secondary Coaches' %>
-  <%= f.collection_select :secondary_coach, @coaches, :id, :first_name, include_blank: true %>
-  <%= f.collection_select :tertiary_coach, @coaches, :id, :first_name, include_blank: true %>
+    <%= f.collection_select :primary_coach, @coaches, :id, :first_name, include_blank: true %></br>
+    <%= f.label 'Secondary Coaches' %>
+    <%= f.collection_select :secondary_coach, @coaches, :id, :first_name, include_blank: true %>
+    <%= f.collection_select :tertiary_coach, @coaches, :id, :first_name, include_blank: true %>
   <% end %>
   <%= f.input :is_admin, label: "Admin" %>
   <%= f.input :is_coach, label: "Coach" %>

@@ -1,0 +1,13 @@
+<div class="text-center">
+  <p><%= Time.now.strftime("%A %B %d, %Y") %></p>
+
+  <h2>Hi <%= @user_name %>.</h2>
+
+  <p>Your payment of <%= @charge %> was successful.</p>
+
+  <p>Your Team at MyHealthStyle, Inc.</p>
+
+  <p><a href="http://www.myhealthstyleapp.com/abouts/terms">Click here for Terms of Use and Terms of Service.</a></p>
+  <div>
+    <%= image_tag attachments['photo.jpg'].url, class: "email-logo" %>
+  </div>
