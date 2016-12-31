@@ -42,6 +42,7 @@ class SubscriptionsController < ApplicationController
       @current_user.add_time(plan_interval, interval_count)
       @current_user.stripe_id = customer.id
       @current_user.save!
+      notify_coaches(@current_user)
       flash[:notice] = "Your subscription was successfully created."
     rescue Stripe::CardError => e
       flash[:error] = e.message
