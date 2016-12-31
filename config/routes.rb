@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
-  post 'subscriptions/webhook' => "/#{ENV["MHSWEBHOOK"]}"
+  post "subscriptions/#{ENV["MHSWEBHOOK"]}" => 'subscriptions#webhook'
 
   root to: "general#welcome"
 
