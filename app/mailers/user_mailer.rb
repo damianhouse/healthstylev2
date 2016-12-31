@@ -32,4 +32,11 @@ class UserMailer < Devise::Mailer
     attachments.inline['photo.jpg'] = File.read(Rails.root.join("app", "assets", "images", "HS_Logo_B3_LO.jpg")).to_s
     mail(to: @user.email, subject: 'HealthStyle Receipt', from: "MyHealthStyle <HealthStyle@HealthStyle.com>")
   end
+
+  def subscription_deleted(user)
+    @user = user
+    @user_name = "#{user.first_name} #{user.last_name}"
+    attachments.inline['photo.jpg'] = File.read(Rails.root.join("app", "assets", "images", "HS_Logo_B3_LO.jpg")).to_s
+    mail(to: @user.email, subject: 'HealthStyle Receipt', from: "MyHealthStyle <HealthStyle@HealthStyle.com>")
+  end
 end

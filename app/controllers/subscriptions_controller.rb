@@ -70,6 +70,8 @@ class SubscriptionsController < ApplicationController
           handle_charge_refunded(user, event_object)
         when 'customer.subscription.updated'
           handle_subscription_updated(user)
+        when 'customer.subscription.deleted'
+          handle_subscription_deleted(user)
         end
       end
       render :json => {:status => 200}
@@ -129,6 +131,10 @@ class SubscriptionsController < ApplicationController
     plan = event_object.lines.data[0].plan.interval
     interval_count = event.data.object.lines.data[0].plan.interval_count
     user.remove_time(plan, interval_count)
+  end
+
+  def handle_subscription_deleted(user)
+    UserMailer.subscription_deleted(user).deliver_now
   end
 
   def normalize_code(code)
