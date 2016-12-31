@@ -73,7 +73,7 @@ class SubscriptionsController < ApplicationController
       render :json => {:status => 200}
     rescue Exception => ex
       render :json => {:status => 422, :error => "Webhook call failed"}
-    end
+      end
   end
 
   private
@@ -112,11 +112,11 @@ class SubscriptionsController < ApplicationController
     plan = event.data.object.lines.data[0].plan.interval
     interval_count = event.data.object.lines.data[0].plan.interval_count
     user.add_time(plan, interval_count)
-    UserMailer.receipt(user, event).deliver_now
+    UserMailer.receipt(user, event_object).deliver_now
   end
 
   def handle_payment_failed(user, event_object)
-    UserMailer.payment_failed(user, event).deliver_now
+    UserMailer.payment_failed(user, event_object).deliver_now
   end
 
   def handle_subscription_updated(user, event_object)
