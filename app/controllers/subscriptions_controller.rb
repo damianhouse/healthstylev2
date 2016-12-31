@@ -56,9 +56,9 @@ class SubscriptionsController < ApplicationController
     event_json = Stripe::Event.retrieve(params[:id])
     event_object = event_json['data']['object']
     begin
-      user = User.find_by(stripe_id: event_object['customer'])
+      user = User.find_by_stripe_id(event_object['customer'])
       #refer event types here https://stripe.com/docs/api#event_types
-      unless user.nil?
+      if user.present?
         case event_json['type']
         when 'invoice.payment_succeeded'
           handle_success_invoice(user, event_object)
@@ -67,13 +67,13 @@ class SubscriptionsController < ApplicationController
         when 'charge.refunded'
           handle_charge_refunded(user, event_object)
         when 'customer.subscription.updated'
-          handle_subscription_updated(user, event_object)
+          handle_subscription_updated(user)
         end
       end
       render :json => {:status => 200}
     rescue Exception => ex
       render :json => {:status => 422, :error => "Webhook call failed"}
-      end
+    end
   end
 
   private
@@ -109,8 +109,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def handle_success_invoice(user, event_object)
-    plan = event.data.object.lines.data[0].plan.interval
-    interval_count = event.data.object.lines.data[0].plan.interval_count
+    plan = event_object.lines.data[0].plan.interval
+    interval_count = event_object.lines.data[0].plan.interval_count
     user.add_time(plan, interval_count)
     UserMailer.receipt(user, event_object).deliver_now
   end
@@ -119,12 +119,12 @@ class SubscriptionsController < ApplicationController
     UserMailer.payment_failed(user, event_object).deliver_now
   end
 
-  def handle_subscription_updated(user, event_object)
+  def handle_subscription_updated(user)
     UserMailer.subscription_updated(user).deliver_now
   end
 
   def handle_charge_refunded(user, event_object)
-    plan = event.data.object.lines.data[0].plan.interval
+    plan = event_object.lines.data[0].plan.interval
     interval_count = event.data.object.lines.data[0].plan.interval_count
     user.remove_time(plan, interval_count)
   end

@@ -13,7 +13,7 @@ class UserMailer < Devise::Mailer
   def receipt(user, event)
     @user = user
     @user_name = "#{user.first_name} #{user.last_name}"
-    @charge = number_to_currency(event.data.object.total)
+    @charge = number_to_currency(event.total)
     attachments.inline['photo.jpg'] = File.read(Rails.root.join("app", "assets", "images", "HS_Logo_B3_LO.jpg")).to_s
     mail(to: @user.email, subject: 'HealthStyle Receipt', from: "MyHealthStyle <HealthStyle@HealthStyle.com>")
   end
@@ -21,7 +21,7 @@ class UserMailer < Devise::Mailer
   def payment_failed(user, event)
     @user = user
     @user_name = "#{user.first_name} #{user.last_name}"
-    @charge = number_to_currency(event.data.object.total)
+    @charge = number_to_currency(event.total)
     attachments.inline['photo.jpg'] = File.read(Rails.root.join("app", "assets", "images", "HS_Logo_B3_LO.jpg")).to_s
     mail(to: @user.email, subject: 'Healthstyle Payment', from: "MyHealthStyle <HealthStyle@HealthStyle.com>")
   end
