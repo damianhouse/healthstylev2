@@ -1,6 +1,7 @@
 class SubscriptionsController < ApplicationController
+  protect_from_forgery except: :webhook
   before_action :authenticate_user!, only: [:new, :create]
-
+  
   def new
     plans_data = Stripe::Plan.all
     @plans = plans_data[:data]
@@ -48,30 +49,35 @@ class SubscriptionsController < ApplicationController
   end
 
   def webhook
+    return nil if StripeWebhook.exists?(stripe_id: params[:id])
+
+    StripeWebhook.create!(stripe_id: params[:id])
+    event_json = Stripe::Event.retrieve(params[:id])
+    event_object = event_json['data']['object']
     begin
-      event_json = JSON.parse(request.body.read)
-      event_object = event_json['data']['object']
       user = User.find_by(stripe_id: event_object['customer'])
       #refer event types here https://stripe.com/docs/api#event_types
-      case event_json['type']
-      when 'invoice.payment_succeeded'
-        handle_success_invoice(user, event_object)
-      when 'invoice.payment_failed'
-        handle_payment_failed(user, event_object)
-      when 'charge.refunded'
-        handle_charge_refunded(user, event_object)
-      when 'customer.subscription.deleted'
-        handle_subscription_deleted(user, event_object)
-      when 'customer.subscription.updated'
-        handle_subscription_updated(user, event_object)
+      unless user.nil?
+        case event_json['type']
+        when 'invoice.payment_succeeded'
+          handle_success_invoice(user, event_object)
+        when 'invoice.payment_failed'
+          handle_payment_failed(user, event_object)
+        when 'charge.refunded'
+          handle_charge_refunded(user, event_object)
+        when 'customer.subscription.deleted'
+          handle_subscription_deleted(user, event_object)
+        when 'customer.subscription.updated'
+          handle_subscription_updated(user, event_object)
+        end
       end
-        render :json => {:status => 200}
+      render :json => {:status => 200}
     rescue Exception => ex
       render :json => {:status => 422, :error => "Webhook call failed"}
       return
     end
   end
-  
+
   private
 
   def is_valid?(coupon, plan_interval, interval_count)
