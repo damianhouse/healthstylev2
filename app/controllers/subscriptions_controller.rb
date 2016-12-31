@@ -1,7 +1,7 @@
 class SubscriptionsController < ApplicationController
   protect_from_forgery except: :webhook
   before_action :authenticate_user!, only: [:new, :create]
-  
+
   def new
     plans_data = Stripe::Plan.all
     @plans = plans_data[:data]
@@ -65,8 +65,6 @@ class SubscriptionsController < ApplicationController
           handle_payment_failed(user, event_object)
         when 'charge.refunded'
           handle_charge_refunded(user, event_object)
-        when 'customer.subscription.deleted'
-          handle_subscription_deleted(user, event_object)
         when 'customer.subscription.updated'
           handle_subscription_updated(user, event_object)
         end
@@ -119,10 +117,6 @@ class SubscriptionsController < ApplicationController
 
   def handle_payment_failed(user, event_object)
     UserMailer.payment_failed(user, event).deliver_now
-  end
-
-  def handle_subscription_deleted(user, event_object)
-
   end
 
   def handle_subscription_updated(user, event_object)

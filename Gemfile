@@ -20,8 +20,6 @@ source 'https://rails-assets.org' do
 end
 # Stripe is for payments and subscriptions
 gem 'stripe'
-# Stripe event handles the webhook events
-gem 'stripe_event'
 # Paperclip and aws-sdk are for image uploads
 gem "paperclip", "~> 5.0.0"
 gem 'aws-sdk', '~> 2'
