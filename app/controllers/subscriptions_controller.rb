@@ -73,7 +73,6 @@ class SubscriptionsController < ApplicationController
       render :json => {:status => 200}
     rescue Exception => ex
       render :json => {:status => 422, :error => "Webhook call failed"}
-      return
     end
   end
 
