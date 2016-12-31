@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
-  mount StripeEvent::Engine => "/#{ENV["MHSWEBHOOK"]}"
+  post 'subscriptions/webhook' => "/#{ENV["MHSWEBHOOK"]}"
 
   root to: "general#welcome"
-  
+
   resources :notes
   resources :conversations
   resources :messages

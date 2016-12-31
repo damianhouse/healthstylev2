@@ -47,6 +47,31 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def webhook
+    begin
+      event_json = JSON.parse(request.body.read)
+      event_object = event_json['data']['object']
+      user = User.find_by(stripe_id: event_object['customer'])
+      #refer event types here https://stripe.com/docs/api#event_types
+      case event_json['type']
+      when 'invoice.payment_succeeded'
+        handle_success_invoice(user, event_object)
+      when 'invoice.payment_failed'
+        handle_payment_failed(user, event_object)
+      when 'charge.refunded'
+        handle_charge_refunded(user, event_object)
+      when 'customer.subscription.deleted'
+        handle_subscription_deleted(user, event_object)
+      when 'customer.subscription.updated'
+        handle_subscription_updated(user, event_object)
+      end
+        render :json => {:status => 200}
+    rescue Exception => ex
+      render :json => {:status => 422, :error => "Webhook call failed"}
+      return
+    end
+  end
+  
   private
 
   def is_valid?(coupon, plan_interval, interval_count)
@@ -77,6 +102,31 @@ class SubscriptionsController < ApplicationController
     rescue Stripe::InvalidRequestError => e
       flash[:notice] = 'Card not processed because coupon code is not valid or has expired.'
     end
+  end
+
+  def handle_success_invoice(user, event_object)
+    plan = event.data.object.lines.data[0].plan.interval
+    interval_count = event.data.object.lines.data[0].plan.interval_count
+    user.add_time(plan, interval_count)
+    UserMailer.receipt(user, event).deliver_now
+  end
+
+  def handle_payment_failed(user, event_object)
+    UserMailer.payment_failed(user, event).deliver_now
+  end
+
+  def handle_subscription_deleted(user, event_object)
+
+  end
+
+  def handle_subscription_updated(user, event_object)
+    UserMailer.subscription_updated(user).deliver_now
+  end
+
+  def handle_charge_refunded(user, event_object)
+    plan = event.data.object.lines.data[0].plan.interval
+    interval_count = event.data.object.lines.data[0].plan.interval_count
+    user.remove_time(plan, interval_count)
   end
 
   def normalize_code(code)
