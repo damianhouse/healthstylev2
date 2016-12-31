@@ -138,6 +138,9 @@ class SubscriptionsController < ApplicationController
     discount = amount * (self.discount_percent * 0.01)
     (amount - discount.to_i)
   end
+  def apples
+    p "testing things"
+  end
 
   def apply_amount_discount(amount)
     amount - self.discount_amount
