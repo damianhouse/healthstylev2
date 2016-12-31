@@ -29,7 +29,12 @@
       <%= f.collection_select :secondary_coach, User.where("is_coach = ? AND approved = ?", true, true), :id, :first_name %>
       <%= f.collection_select :tertiary_coach, User.where("is_coach = ? AND approved = ?", true, true), :id, :first_name %>
     </div>
-
-    <%= f.submit "Next" %>
+  </br>
+    <%= button_tag(type: 'submit', class: "btn sign-up-button") do %>
+    Next
+    <% end %>
+    <div id="desktopshow"
+      </br>
+    </div>
   <% end %>
 </div>
