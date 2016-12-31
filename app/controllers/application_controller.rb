@@ -70,9 +70,12 @@ class ApplicationController < ActionController::Base
   end
 
   def notify_coaches(user)
-    notify_coach(user, Coach.find(user.primary_coach))
-    notify_coach(user, Coach.find(user.secondary_coach))
-    notify_coach(user, Coach.find(user.tertiary_coach))
+    primary = Coach.find(user.primary_coach)
+    secondary = Coach.find(user.secondary_coach)
+    tertiary = Coach.find(user.tertiary_coach)
+    notify_coach(user, primary) if primary
+    notify_coach(user, secondary) if secondary
+    notify_coach(user, tertiary) if tertiary
   end
 
   protected
