@@ -1,6 +1,7 @@
 class SubscriptionsController < ApplicationController
   protect_from_forgery except: :webhook
   before_action :authenticate_user!, only: [:new, :create]
+  respond_to :html, :json
 
   def new
     plans_data = Stripe::Plan.all
