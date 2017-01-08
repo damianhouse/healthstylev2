@@ -22,7 +22,7 @@ class User < ApplicationRecord
           self.expires_at = (DateTime.now + 1.week)
           self.save!
         when "month"
-          self.expires_at = (DateTime.now + (interval_count.month))
+          self.expires_at = (DateTime.now + interval_count.month)
           self.save!
         when "year"
           self.expires_at = (DateTime.now + 1.year)
@@ -57,7 +57,7 @@ class User < ApplicationRecord
           self.expires_at = (DateTime.now - 1.week)
           self.save!
         when "month"
-          self.expires_at = (DateTime.now - (interval_count.month))
+          self.expires_at = (DateTime.now - interval_count.month)
           self.save!
         when "year"
           self.expires_at = (DateTime.now - 1.year)
