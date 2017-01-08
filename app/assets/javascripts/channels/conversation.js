@@ -20,11 +20,11 @@ jQuery(document).on('turbolinks:load', function() {
       disconnected: function() {},
       received: function(data) {
         console.log(JSON.stringify(data));
-        const current_user_id = messages.data('current-user-id');
-        if (data["messages"] !== undefined && data["messages"].constructor === Array) {
+        var current_user_id = messages.data('current-user-id');
+        if (data["messages"] != undefined && data["messages"].constructor === Array) {
           updatedMessages = data["messages"];
           messagesUpdate(updatedMessages);
-        } else if (data !== null) {
+        } else if (data != null) {
           message = data["message"];
           current_user_id: messages.data('current-user-id');
           messageAppend(message, current_user_id);
@@ -32,25 +32,34 @@ jQuery(document).on('turbolinks:load', function() {
 
         function messagesUpdate(updatedMessages) {
           updatedMessages.map(function (message) {
-            if (message !== updatedMessages[updatedMessages.length - 1]) {
+            if (message != updatedMessages[updatedMessages.length - 1]) {
               $('.received').text("");
             } else {
-                if (message.read === true && message.user_id === current_user_id) {
+                console.log(message);
+                if (message.read == true && message.user_id == current_user_id) {
                   var date = new Date(message.updated_at);
                   var time = date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
-                  $('#'+ message.id +'').text("Read "+ time);
-                } else if (message.user_id === current_user_id) {
+                  $('#'+ message.id +'').text("Read " + time);
+                } else if (message.user_id == current_user_id) {
                   var date = new Date(message.updated_at);
                   var time = date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
-                  $('#'+ message.id +'').text("Delivered "+ time);
+                  $('#'+ message.id +'').text("Delivered " + time);
                 }
               }
               return;
           });
         }
 
+        function clearReadStatus(user) {
+          user = "user-" + user.toString();
+          userDivs = document.getElementsByClassName(user);
+          for (i = 0; i < userDivs.length; i++) {
+            userDivs[i].style.display = "none";
+          }
+        }
+
         function checkReadStatus(message) {
-          if (message.read === "true") {
+          if (message.read == "true") {
             return "Read "
           } else {
             return "Delivered "
@@ -63,11 +72,13 @@ jQuery(document).on('turbolinks:load', function() {
           date = new Date(message.updated_at);
           time = date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
           readStatus = checkReadStatus(message);
-          current_user_message = '<div id="messages" class="msg send"><div id="message_body" class="msgtext">'+ message.body +'</div><div id="'+ message.id +'" class="time">'+ time +'</div></div>';
-          other_user_message = '<div id="messages receive" class="msg receive"><div id="message_body" class="msgtext">'+ message.body +'</div><div id="'+ message.id +'" class="time ">'+ time +'</div></div>';
+          current_user_message = '<div id="messages" class="msg send"><div id="message_body" class="msgtext">'+ message.body +'</div><div id="'+ message.id +'" class="time user-'+ current_user_id +'">'+ readStatus + time +'</div></div>';
+          other_user_message = '<div id="messages receive" class="msg receive"><div id="message_body" class="msgtext">'+ message.body +'</div><div id="'+ message.id +'" class="time user-'+ message.user_id +'">'+ time +'</div></div>';
           if (current_user_id === message_user_id) {
+            clearReadStatus(current_user_id);
             $("#messages").append(current_user_message);
           } else {
+            clearReadStatus(message.user_id);
             $("#messages").append(other_user_message);
           }
           return messages_to_bottom();

@@ -8,8 +8,8 @@
   <%= hidden_field_tag 'conversation_id', @conversation.id %>
 
   <div class="form-group">
-    <%= f.text_area :body, class: 'form-control', placeholder: "Enter your message here" %>
+    <%= f.text_area :body, class: 'form-control', placeholder: "Insert your message. Enter will send" %>
   </div>
 
-  <%= f.submit "Post", class: 'btn btn-primary btn-lg' %>
+  <%= f.submit "Post", id: "data-send", class: 'btn btn-primary btn-lg' %>
 <% end %>
