@@ -19,7 +19,6 @@ jQuery(document).on('turbolinks:load', function() {
       },
       disconnected: function() {},
       received: function(data) {
-        console.log(JSON.stringify(data));
         var current_user_id = messages.data('current-user-id');
         if (data["messages"] != undefined && data["messages"].constructor === Array) {
           updatedMessages = data["messages"];
@@ -35,7 +34,6 @@ jQuery(document).on('turbolinks:load', function() {
             if (message != updatedMessages[updatedMessages.length - 1]) {
               $('.received').text("");
             } else {
-                console.log(message);
                 if (message.read == true && message.user_id == current_user_id) {
                   var date = new Date(message.updated_at);
                   var time = date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
@@ -66,15 +64,19 @@ jQuery(document).on('turbolinks:load', function() {
           }
         }
 
+        function lastMessageRead() {
+          document.body.innerHTML = document.body.innerHTML.replace('Delivered', 'Read');
+          return messages_to_bottom()
+        }
+
         function messageAppend(message, current_user_id) {
-          console.log(message);
           message_user_id = message.user_id;
           date = new Date(message.updated_at);
           time = date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
           readStatus = checkReadStatus(message);
           current_user_message = '<div id="messages" class="msg send"><div id="message_body" class="msgtext">'+ message.body +'</div><div id="'+ message.id +'" class="time user-'+ current_user_id +'">'+ readStatus + time +'</div></div>';
           other_user_message = '<div id="messages receive" class="msg receive"><div id="message_body" class="msgtext">'+ message.body +'</div><div id="'+ message.id +'" class="time user-'+ message.user_id +'">'+ time +'</div></div>';
-          if (current_user_id === message_user_id) {
+          if (current_user_id == message_user_id) {
             clearReadStatus(current_user_id);
             $("#messages").append(current_user_message);
           } else {
