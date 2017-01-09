@@ -11,17 +11,16 @@
     <meta name="description" content="Live, on demand health coaches affordably on mobile. Get the support you need to lose weight, fight diabetes and cancers, sleep better, quit smoking, be mindful!"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
     <meta name="p:domain_verify" content="86506f23d5e55f6dbe1434256eb60afc"/>
-    <%= favicon_link_tag 'favicon.ico' %>
   </head>
 
   <body class="healthstyle">
-    <div class="container-fluid content">
+    <div  id="below-nav-bar" class="container-fluid content">
       <%= render 'layouts/nav_bar' %>
       <div class="col-sm-12" style="margin-top:40px;">
         <%= yield %>
       </div>
       <div class="text-center">
-        <% if user_signed_in? %>
+        <% if user_signed_in?%>
           <br \>
           <button class="btn sign-up-button"><%= link_to 'About Us', general_about_us_path, class: "sign-up-text" %></button>
         <% end %>

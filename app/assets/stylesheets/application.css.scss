@@ -20,7 +20,9 @@
  @import 'font-awesome';
  @import 'bootswatch';
  @import 'users';
-
+ #below-nav-bar {
+   background-color: #F5F5F5;
+ }
  .flash-notice {
    text-weight: bold;
    color: red;

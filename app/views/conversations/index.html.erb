@@ -1,4 +1,5 @@
 <!-- Coach conversations until else -->
+<div class="table-condensed conversations">
 <% if @user.is_coach %>
   <% if @primary_users.nil? && @secondary_users.nil? %>
     <p>Looks like you don't currently have any clients!</p>
@@ -20,9 +21,10 @@
   <% end %>
 <!-- User conversations below -->
 <% else %>
+
   <h1>Teams</h1>
 
-  <table class="table table-responsive table-hover team">
+  <table class="table table-responsive table-bordered table-hover team">
       <% if @user.primary_coach != nil %>
         <% user_convos = @user.conversations.where(coach_id: @primary_coach.id) %>
         <% if user_convos.length >= 1 %>
@@ -117,3 +119,4 @@
         <% end %>
       <% end %>
   </table>
+</div>
