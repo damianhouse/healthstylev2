@@ -16,9 +16,7 @@
 //= require bootstrap
 //= require cable
 //= require turbolinks
-$(document).on('ready page:load', function () {
-  submitNewMessage();
-});
+
 
 function submitNewMessage(){
   $('textarea#message_body').keydown(function(event) {
@@ -29,3 +27,16 @@ function submitNewMessage(){
      }
   });
 }
+function clickableRows() {
+  $(".clickable-row").on("click", function() {
+    window.location = $(this).data("url");
+  });
+}
+document.addEventListener("turbolinks:load", function() {
+  clickableRows();
+})
+
+$(document).on('ready page:load page:change', function () {
+  submitNewMessage();
+  clickableRows();
+});

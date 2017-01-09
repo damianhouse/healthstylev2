@@ -1,9 +1,9 @@
 <% @users.each do |user| %>
   <% user_convos = user.conversations.where(coach_id: @coach.id) %>
-  <tr>
-    <td class="title">
-      <div class="msg">
-        <% user_convos.each do |convo| %>
+    <% user_convos.each do |convo| %>
+      <tr class="clickable-row" data-url="/conversations/<%= convo.id %>">
+        <td class="title">
+          <div class="msg">
           <% if user_convos.length >= 1 %>
             <%= link_to convo do %>
               <% if convo.messages.where("user_id = ?", convo.user_id).last != nil && convo.messages.where("user_id = ?", convo.user_id).last.read %>

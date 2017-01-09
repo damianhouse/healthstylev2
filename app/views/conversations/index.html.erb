@@ -25,25 +25,25 @@
   <table class="table table-responsive table-hover team">
       <% if @user.primary_coach != nil %>
         <% user_convos = @user.conversations.where(coach_id: @primary_coach.id) %>
-          <tr>
+        <% if user_convos.length >= 1 %>
+          <% user_convos.each do |convo| %>
+          <tr class="clickable-row" data-url="/conversations/<%= convo.id %>">
             <td class="title">
               <h2>Lead Coach</h2>
               <div class="msg">
-                <% if user_convos.length >= 1 %>
-                  <% user_convos.each do |convo| %>
-                    <%= link_to convo do %>
-                      <% if convo.messages.last != nil && convo.messages.where("user_id = ?", convo.coach_id).last.read %>
-                        <i class="status msg new"></i><span><i>No new <br/>messages</i></span>
-                      <% elsif convo.messages.last != nil && convo.messages.where("user_id = ?", convo.coach_id).last.read == false%>
-                        <i class="status msg unread"></i><span><i>New Message</i></span>
-                      <% elsif convo.messages.last == nil %>
-                        <i class="status msg empty"></i><span><i>No messages</i></span>
-                      <% end %>
-                    <% end %>
-                  <% end %>
-                <% elsif user_convos.length == 0 %>
-                  <i class="status msg empty"></i><span><i>No messages</i></span>
-                <% end %>
+            <%= link_to convo do %>
+              <% if convo.messages.last != nil && convo.messages.where("user_id = ?", convo.coach_id).last.read %>
+                <i class="status msg new"></i><span><i>No new <br/>messages</i></span>
+              <% elsif convo.messages.last != nil && convo.messages.where("user_id = ?", convo.coach_id).last.read == false%>
+                <i class="status msg unread"></i><span><i>New Message</i></span>
+              <% elsif convo.messages.last == nil %>
+                <i class="status msg empty"></i><span><i>No messages</i></span>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% elsif user_convos.length == 0 %>
+          <i class="status msg empty"></i><span><i>No messages</i></span>
+        <% end %>
               </div>
             </td>
             <td class="avatar">
@@ -72,12 +72,12 @@
       <% if @secondary_coaches != nil %>
         <% @secondary_coaches.each do |coach| %>
           <% user_convos = @user.conversations.where(user_id: @user.id, coach_id: coach.id) %>
-          <tr>
+          <% if user_convos.length >= 1 %>
+            <% user_convos.each do |convo| %>
+          <tr class="clickable-row" data-url="/conversations/<%= convo.id %>">
             <td class="title">
               <h2>Team Coach</h2>
               <div class="msg">
-                <% if user_convos.length >= 1 %>
-                  <% user_convos.each do |convo| %>
                     <%= link_to convo do %>
                       <% if convo.messages.last != nil && convo.messages.where("user_id = ?", convo.coach_id).last.read %>
                         <i class="status msg new"></i><span><i>No new <br/>messages</i></span>
