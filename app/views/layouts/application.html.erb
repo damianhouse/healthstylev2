@@ -16,7 +16,10 @@
   </head>
 
   <body class="healthstyle">
-    <div  id="below-nav-bar" class="container-fluid content">
+    <% unless controller_name == 'conversations' && action_name == 'show' %>
+      <div id="below-nav-bar" class="container-fluid content">
+    <% end %>
+
       <%= render 'layouts/nav_bar' %>
       <div class="col-sm-12" style="margin-top:40px;">
         <%= yield %>

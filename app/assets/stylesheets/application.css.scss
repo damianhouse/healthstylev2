@@ -43,6 +43,7 @@
 
  #messages {
    max-height: 450px;
+   padding-top: 20px;
    overflow-y: auto;
    .avatar {
      margin: 0.5rem;
@@ -115,9 +116,11 @@
  }
 
  .send_button{
-   color: #ffffff;
-   background-color: #FF6600;
-   border-color: #FF6600;
+  color: #FF6600;
+  background: transparent;
+  font-weight: 700;
+  text-align: right;
+  float: right;
  }
 
  .orange_text{

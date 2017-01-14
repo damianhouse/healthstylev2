@@ -36,7 +36,7 @@ div.chat div.time {
 }
 div.chat {
   background: #fff;
-  margin: 8px 0 0;
+  margin: 60px 0 0;
   position: relative;
   padding: 15px 8px 5px;
   margin: 0 -15px;
@@ -153,4 +153,43 @@ div.sendmsg div.actions input {
 }
 .second-nav-bar {
   top: 100px;
+}
+#messaging-form textarea {
+  width: 83%;
+  float:left;
+}
+#messaging-form input {
+  border: 0;
+  padding: 0;
+  outline: 0;
+  width: 100vw;
+}
+#messaging-form input[type='submit'] {
+  width:14%;
+  padding-top: 3%;
+  color: #FF6600;
+  background:transparent;
+  font-weight:700;
+  text-align:right;
+  float:right;
+}
+#desktopshow.footer textarea {
+  width: 90%;
+  float:left;
+}
+#desktopshow.footer input {
+  border: 0;
+  padding: 0;
+  outline: 0;
+  width: 100vw;
+}
+#desktopshow.footer input[type='submit'] {
+  width: 10%;
+  padding-top: 1%;
+  padding-right: 3%;
+  color: #FF6600;
+  background:transparent;
+  font-weight:700;
+  text-align:right;
+  float:right;
 }
