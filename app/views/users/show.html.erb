@@ -1,6 +1,5 @@
 <div class="text-center">
   <p id="notice"><%= notice %></p>
-  <%= current_user if current_user %>
 
   <% if @user.avatar.exists? %>
     <%= image_tag @user.avatar, id: "show-page-avatar", class: "img-responsive" %>
