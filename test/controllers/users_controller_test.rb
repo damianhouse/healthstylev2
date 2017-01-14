@@ -69,4 +69,31 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     delete "/admin/users/#{users(:admin).id}"
     assert_redirected_to "/admin/users"
   end
+
+  test "a user not logged in can only see coach show page" do
+    get "/users/#{users(:coach).id}"
+    assert_response :success
+
+    get "/users/#{users(:user).id}"
+    assert_redirected_to root_url
+  end
+
+  test "an admin can view any user show page" do
+    sign_in users(:admin)
+    get "/users/#{users(:coach).id}"
+    assert_response :success
+
+    get "/users/#{users(:user).id}"
+    assert_response :success
+  end
+
+  test "a coach can view a user show page but not an admin show page" do
+    sign_in users(:coach)
+
+    get "/users/#{users(:user).id}"
+    assert_response :success
+
+    get "/users/#{users(:admin).id}"
+    assert_redirected_to root_url
+  end
 end

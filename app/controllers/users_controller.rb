@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_coaches, only: [:new, :edit, :update]
-  before_action :authenticate_user!
-  before_action :authenticate_admin!
+  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_admin!, except: [:show]
+  before_action :is_authorized?, only: [:show]
   # GET /users
   # GET /users.json
   def index
@@ -12,6 +13,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @primary_coach = User.find(@user.primary_coach) if @user.primary_coach
+    @secondary_coach = User.find(@user.secondary_coach) if @user.secondary_coach
+    @tertiary_coach = User.find(@user.tertiary_coach) if @user.tertiary_coach
   end
 
   # GET /users/new
@@ -71,6 +75,19 @@ class UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def is_authorized?
+      if current_user
+        unless @user.is_coach || @user == current_user || current_user.is_admin || current_user.is_coach && @user.is_admin == false
+          redirect_to root_path
+        end
+      else
+        unless @user.is_coach
+          redirect_to root_path
+        end
+      end
+    end
+
     def set_coaches
       @coaches = User.where("is_coach = ? AND approved = ?", true, true)
     end

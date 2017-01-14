@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   scope '/admin' do
     resources :users
   end
-
+  get 'users/:id' => 'users#show'
   get 'subscriptions/new'
   get 'subscriptions/create'
   post 'subscriptions/create'

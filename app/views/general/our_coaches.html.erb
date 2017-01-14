@@ -2,7 +2,7 @@
 
 <table class="table table-responsive table-hover team">
   <% @coaches.each do |coach| %>
-    <tr>
+    <tr class="clickable-row" data-url="/users/<%= coach.id %>">
       <td>
         <div class="panel panel-primary">
           <div class="panel-heading">
