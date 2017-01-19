@@ -43,7 +43,7 @@ class SubscriptionsController < ApplicationController
       @current_user.stripe_id = customer.id
       @current_user.save!
       notify_coaches(@current_user)
-      notify_user(@current_user)
+      TextWelcomeNewUserJob.perform_now(@current_user)
       flash[:notice] = "Your subscription was successfully created."
     rescue Stripe::CardError => e
       flash[:error] = e.message

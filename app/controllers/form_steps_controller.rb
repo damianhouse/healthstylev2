@@ -19,7 +19,6 @@ class FormStepsController < ApplicationController
       create_conversations(@user)
       if Rails.env == 'production'
         UserMailer.welcome(@user).deliver
-        notify_admin(@user)
       end
     end
   end

@@ -12,7 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     super
     if @user.save
-      notify_admin(@user)
+      TextAdminNewUserJob.perform_now(@user)
       UserMailer.welcome(@user).deliver_now
     end
   end

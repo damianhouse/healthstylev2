@@ -28,54 +28,10 @@ class ApplicationController < ActionController::Base
     @message.save!
   end
 
-  def notify_admin(user)
-    begin
-      client = Twilio::REST::Client.new Rails.application.secrets.twilio_account_sid, Rails.application.secrets.twilio_auth_token
-      message = client.messages.create from: '8284820730', to: ENV['ALEXS_PHONE_NUMBER'],
-
-      body: "#{user.first_name + ' ' + user.last_name} just signed up for the app!"
-    rescue
-      flash[:notice] =  "Please enter a valid phone number."
-    end
-  end
-
-  def notify_user(user)
-    unless user.phone_number == ""
-      begin
-        client = Twilio::REST::Client.new Rails.application.secrets.twilio_account_sid, Rails.application.secrets.twilio_auth_token
-        message = client.messages.create from: '8284820730', to: user.phone_number,
-
-        body: 'Welcome to MyHealthStyle! Your coaches are waiting for you! Please go to your dashboard and tell them all about you! Check back often for their responses, they may live in a different time zone'
-      rescue
-        flash[:notice] =  "Please enter a valid phone number."
-      end
-    else
-      redirect_to charges_new_path
-    end
-  end
-
-  def notify_coach(user, coach)
-    unless coach.phone_number == ""
-      begin
-        client = Twilio::REST::Client.new Rails.application.secrets.twilio_account_sid, Rails.application.secrets.twilio_auth_token
-        message = client.messages.create from: '8284820730', to: coach.phone_number,
-
-        body: "#{user.first_name user.last_name} added you as a coach! www.myhealthstyleapp.com/conversations.com"
-      rescue
-        flash[:notice] =  "Please enter a valid phone number."
-      end
-    else
-      redirect_to charges_new_path
-    end
-  end
-
   def notify_coaches(user)
-    primary = User.find(user.primary_coach)
-    secondary = User.find(user.secondary_coach)
-    tertiary = User.find(user.tertiary_coach)
-    notify_coach(user, primary) if primary
-    notify_coach(user, secondary) if secondary
-    notify_coach(user, tertiary) if tertiary
+    TextCoachNewUserJob.perform_now(user, user.primary_coach) if user.primary_coach
+    TextCoachNewUserJob.perform_now(user, user.secondary_coach) if user.secondary_coach
+    TextCoachNewUserJob.perform_now(user, user.tertiary_coach) if user.tertiary_coach
   end
 
   protected
