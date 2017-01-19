@@ -4,7 +4,6 @@ class TextCoachNewUserJob < ApplicationJob
   def perform(user, the_coach)
     coach = User.find(the_coach)
     unless coach.phone_number == ""
-      byebug
       begin
         client = Twilio::REST::Client.new Rails.application.secrets.twilio_account_sid, Rails.application.secrets.twilio_auth_token
         message = client.messages.create from: '8284820730', to: coach.phone_number,
