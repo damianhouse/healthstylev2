@@ -19,7 +19,7 @@ jQuery(document).on('turbolinks:load', function() {
       },
       disconnected: function() {},
       received: function(data) {
-        var current_user_id = messages.data('current-user-id');
+        const current_user_id = messages.data('current-user-id');
         if (data["messages"] != undefined && data["messages"].constructor === Array) {
           updatedMessages = data["messages"];
           messagesUpdate(updatedMessages);

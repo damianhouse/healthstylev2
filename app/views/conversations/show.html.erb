@@ -3,23 +3,13 @@
 <div id="messages" class="conversation chat" data-conversation-id="<%= @conversation.id %>" data-current-user-id="<%= @current_user_id %>">
   <%= render @conversation.messages.order('created_at ASC') %>
 </div>
-<div id="mobileshow" class="footer">
-  <%= form_for @message, url: '#' do |f| %>
-    <%= hidden_field_tag 'conversation_id', @conversation.id %>
-    <div id="messaging-form" class="form-group">
-      <%= f.text_area :body, class: 'form-control', id: "message_body", placeholder: "Insert your message. Enter will send" %>
-      <%= f.submit "Send", id: "data-send" %>
-    </div>
-  <% end %>
-</div>
-<div id="desktopshow" class="footer">
-  <%= form_for @message, url: '#' do |f| %>
-    <%= hidden_field_tag 'conversation_id', @conversation.id %>
 
-    <div class="form-group">
-      <%= f.text_area :body, class: 'form-control', placeholder: "Insert your message. Enter will send" %>
-    </div>
+<%= form_for @message, url: '#' do |f| %>
+  <%= hidden_field_tag 'conversation_id', @conversation.id %>
 
+  <div id="messaging-form" class="form-group">
+    <%= f.text_area :body, class: 'form-control', id: "message_body", placeholder: "Insert your message. Enter will send" %>
     <%= f.submit "Send", id: "data-send" %>
-  <% end %>
-</div>
+  </div>
+
+<% end %>
