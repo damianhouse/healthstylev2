@@ -96,7 +96,8 @@ div.h2 span.tagline {
 }
 @media (max-width: 568px) {
   #first-learn-more {
-    background-image: url(reach-your-potential-mobile.jpg);
+    background-image: url(<%= asset_path 'reach-your-potential-mobile.jpg' %>);
+    <%= %>
     vertical-align: middle;
     font-weight: normal;
     height: 100vh;
@@ -108,7 +109,7 @@ div.h2 span.tagline {
     }
   }
   #second-learn-more {
-    background-image: url(phone-on-table-mobile.jpg);
+    background-image: url(<%= asset_path 'phone-on-table-mobile.jpg' %>);
     background-repeat: no-repeat;
     height: 100vh;
     vertical-align: middle;
@@ -128,7 +129,7 @@ div.h2 span.tagline {
     font-weight: normal;
   }
   #fourth-learn-more {
-    background-image: url(time-and-money-mobile.jpg);
+    background-image: url(<%= asset_path 'time-and-money-mobile.jpg' %>);
     background-repeat: no-repeat;
     height: 100vh;
     vertical-align: middle;
@@ -143,7 +144,7 @@ div.h2 span.tagline {
     }
   }
   #fifth-learn-more {
-    background-image: url(sunset-photo.jpg);
+    background-image: url(<%= asset_path 'sunset-photo.jpg' %>);
     vertical-align: middle;
     font-weight: normal;
     color: white;
@@ -183,14 +184,14 @@ div.h2 span.tagline {
 }
 @media (min-width: 568px) {
   #first-learn-more {
-    background-image: url(reach-your-potential.jpg);
+    background-image: url(<%= asset_path 'reach-your-potential.jpg' %>);
     background-size: 100% auto;
     background-repeat: no-repeat;
     height: 100vh;
     max-height: 800px;
   }
   #second-learn-more {
-    background-image: url(phone-on-table.jpg);
+    background-image: url(<%= asset_path 'phone-on-table.jpg' %>);
     background-size: 100% auto;
     background-repeat: no-repeat;
     margin:0;
@@ -202,7 +203,7 @@ div.h2 span.tagline {
     color: white;
   }
   #third-learn-more {
-    background-image: url(workout-woman.jpg);
+    background-image: url(<%= asset_path 'workout-woman.jpg' %>);
     background-size: 100% auto;
     background-repeat: no-repeat;
     height: 100vh;
@@ -210,7 +211,7 @@ div.h2 span.tagline {
     padding-top: 5%;
   }
   #fourth-learn-more {
-    background-image: url(time_and_money.jpg);
+    background-image: url(<%= asset_path 'time_and_money.jpg' %>);
     background-size: 100% auto;
     background-repeat: no-repeat;
     margin:0;
@@ -222,7 +223,7 @@ div.h2 span.tagline {
     color: white;
   }
   #fifth-learn-more {
-    background-image: url(sparks.jpg);
+    background-image: url(<%= asset_path 'sparks.jpg' %>);
     background-size: 100% auto;
     background-repeat: no-repeat;
     height: 100vh;
