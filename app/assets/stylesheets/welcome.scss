@@ -17,16 +17,7 @@
 .long-term {
   padding-bottom: 0;
 }
-.orange-font {
-  color: #FF6600;
-  font-weight: bold;
-  &.mobile {
-    font-size: 10vw;
-    &.larger-letters {
-      font-size: 20vw;
-    }
-  }
-}
+
 .container-fluid {
   margin: 0;
   padding: 0;
@@ -94,37 +85,39 @@ div.h2 span.tagline {
 .font-white {
   color: white;
 }
+.orange-font {
+  color: #FF6600;
+}
 @media (max-width: 568px) {
-  div.learn-more p {
-    font-size: .8em;
-  }
-  div.learn-more {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-  }
   #first-learn-more {
     background-image: url(reach-your-potential-mobile.jpg);
     vertical-align: middle;
     font-weight: normal;
-    height: 100%;
+    height: 100vh;
+    &.learn-more {
+      padding-top: 20vh 0 0 20vh;
+      font-size: .8em;
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+    }
   }
   #second-learn-more {
     background-image: url(phone-on-table-mobile.jpg);
-    background-size: 100% auto;
     background-repeat: no-repeat;
-    height: 100%;
-    font-size: .8em;
-    margin: 0;
+    height: 100vh;
+    vertical-align: middle;
     color: white;
     font-weight: normal;
-    padding: 0;
+    &.learn-more {
+      padding-top: 20vh 0 0 20vh;
+      font-size: .8em;
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+    }
   }
   #third-learn-more {
     background-color: #0B090B;
-    height: 130%;
+    height: 100vh;
     margin: auto;
     font-weight: normal;
   }
@@ -134,29 +127,33 @@ div.h2 span.tagline {
   }
   #main-image-div {
     padding: 0;
+    & img {
+      width: 90%;
+    }
   }
-  img#main-image {
-    width: 33%;
+  #second-button-group {
+    padding-bottom: 15px;
+  }
+  .bottom-line {
+    font-weight: bold;
+    font-size: 8vw;
+  }
+  .heading {
+    margin: 0;
+    font-size: 3em;
+    font-weight: bold;
+  }
+  #myCarousel > div > div.item.active > p {
+    font-size: 3em;
   }
 }
 @media (min-width: 568px) {
-  div.learn-more p {
-    font-size: 1em;
-  }
-  div.learn-more {
-    margin:0;
-    padding-top: 0;
-    padding-bottom: 15px;
-    font-weight: normal;
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    height: 100vh;
-  }
   #first-learn-more {
     background-image: url(reach-your-potential.jpg);
     background-size: 100% auto;
     background-repeat: no-repeat;
     height: 100vh;
+    max-height: 800px;
   }
   #second-learn-more {
     background-image: url(phone-on-table.jpg);
@@ -167,20 +164,41 @@ div.h2 span.tagline {
     padding-bottom: 15px;
     font-weight: normal;
     height: 100vh;
-    }
+    max-height: 800px;
+    color: white;
+  }
   #third-learn-more {
     background-image: url(workout-woman.jpg);
     background-size: 100% auto;
     background-repeat: no-repeat;
     height: 100vh;
+    max-height: 800px;
     padding-top: 5%;
+  }
+  #main-image-div {
+    padding: 0;
   }
   #welcome {
     height: 100vh;
+    max-height: 800px;
   }
-
   #learn-more-right {
     font-size: 1em;
     padding: 9%;
+  }
+  .bottom-line {
+    font-weight: bold;
+    font-size: 3vw;
+  }
+  .heading {
+    margin: 0;
+    font-size: 6em;
+    font-weight: bold;
+  }
+  img#main-image {
+    width: 30%;
+  }
+  #myCarousel > div > div.item.active > p {
+    font-size: 3em;
   }
 }

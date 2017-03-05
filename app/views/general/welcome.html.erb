@@ -1,17 +1,13 @@
 <div id="welcome" class="text-center learn-more">
-  <div class="three-coaches">
-    <span id="mobileshow"><h3 class="orange-font mobile"><span class="tagline">3 COACHES</span></h2></span>
-    <span id="mobileshow"><h3 class="orange-font mobile larger-letters"><span class="tagline">1 GOAL</span></h2></span>
-    <span id="mobileshow"><p class="orange-font mobile"><span class="tagline">A HEALTHIER YOU!</span></p></span>
-    <span id="desktopshow"><h1 class="orange-font">3 Coaches, 1 Goal: A Healthier You!</h1></span>
-  </div>
   <div id="main-image-div">
-    <%= image_tag "HS_Logo_B3_LO_Light_Grey_background.jpg", id:"main-image", class: "img-responsive" %>
+    <%= image_tag "HS_Logo_B3_LO.jpg", id:"main-image", class: "img-responsive" %>
   </div>
-  <br>
+  <div class="three-coaches">
+    <h3 class="orange-font heading">Partner Up!</h2>
+  </div>
   <div class="benefits-carousel">
-    <h2 class="bold">Your team awaits to<br />help you</h2>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <h2 class="bold">Your team awaits to help you</h2>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
         <!-- Wrapper for carousel items -->
       <div class="carousel-inner">
         <div class="item active">
@@ -50,32 +46,71 @@
     <button class="btn sign-up-button"><%= link_to 'Sign In', new_user_session_path, class: "sign-up-text"%></button>
   </div>
   <div class="text-center">
-    <h2 class="bold">This is your life! Partner Up to make it your best.</h2>
+    <h2 class="orange-font bold bottom-line">This is your life!<span id="mobileshow"><br /></span> Partner Up to make it your best.</h2>
   </div>
 </div>
 </div>
 <div id="first-learn-more" class="text-center col-sm-12">
   <div class="learn-more">
     <p><span class="why-heading">Why a team of 3?</span></p>
-    <p><span class="reason-why">We understand it’s not easy to reach goals. Pick your Lead Coach to work with you everyday, for lasting change.</span></p>
-    <p><span class="reason-why">Happiness and serenity are a matter of perspective, choose a Team Coach to work with your heart, spirit and to find balance.</span></p>
-    <p><span class="reason-why">Feeling strong and fit is a process not an event. Select your second Team Coach to inspire you from couch to wherever you want to go!</span></p>
+    <p><span class="reason-why">We understand it’s not easy to reach goals. Pick your <u>Lead Coach</u> to work with you everyday, for lasting change.</span></p>
+    <p><span class="reason-why">Happiness and serenity are a matter of perspective, choose a <u>Team Coach</u> to work with your heart, spirit and to find balance.</span></p>
+    <p><span class="reason-why">Feeling strong and fit is a process not an event. Select your second <u>Team Coach</u> to inspire you from couch to wherever you want to go!</span></p>
+    <p class="orange-font"><span class="reason-why">
+      <b>We are NOT a one size fits all solution.<br>We are YOUR solution.</b>
+    </span></p>
+    <div id="learn-more-buttons second-button-group" class="text-center ">
+      <button class="btn sign-up-button"><%= link_to 'Sign Up Now', new_user_registration_path, class: "sign-up-text"%></button>
+      <button class="btn sign-up-button"><%= link_to 'Sign In', new_user_session_path, class: "sign-up-text"%></button>
+    </div>
   </div>
 </div>
 <div id="second-learn-more" class="text-center col-sm-12">
-  <div id="learn-more-right" class="col-sm-12 col-md-6 col-md-offset-7">
+  <div class="learn-more col-sm-12 col-md-6 col-md-offset-5">
     <p><span class="why-heading">Why mobile?</span></p>
-    <p><span class="reason-why">MyHealthStyle is the only platform bringing live, on-demand behavioral health coaching, affordably on mobile. </span></p>
-    <p><span class="reason-why">Our goal is to fit into your busy life in the most convenient manner, while providing the proven private office experience.</span></p>
-    <p><span class="reason-why">Daily accountability, fun and rapport. Right at your fingertips.</span></p>
+    <div class="benefits-carousel">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+          <!-- Wrapper for carousel items -->
+        <div class="carousel-inner">
+          <div class="item active">
+            <p class="orange-font text-center carousel-benefits bold">Safe</p>
+          </div>
+          <div class="item">
+            <p class="orange-font text-center carousel-benefits bold">Private</p>
+          </div>
+          <div class="item">
+            <p class="orange-font text-center carousel-benefits bold">Available</p>
+          </div>
+          <div class="item">
+            <p class="orange-font text-center carousel-benefits bold">Personalized</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p><span class="reason-why">MyHealthStyle is the only platform bringing <b>live, on-demand behavioral health coaching</b>, affordably on mobile <b>DAILY</b>. Our goal is to fit into your busy life in the most convenient manner.</span></p>
+    <p><span class="reason-why">Human to human interaction is proven to get the best long-term results.</span></p>
+    <p><span class="reason-why">
+      <b>Your team of three is here to help you achieve.</b>
+    </span></p>
+    <div id="learn-more-buttons second-button-group" class="text-center ">
+      <button class="btn sign-up-button"><%= link_to 'Sign Up Now', new_user_registration_path, class: "sign-up-text"%></button>
+      <button class="btn sign-up-button"><%= link_to 'Sign In', new_user_session_path, class: "sign-up-text"%></button>
+    </div>
   </div>
 </div>
 <div id="third-learn-more" class="text-center col-sm-12">
   <div class="learn-more col-sm-12 col-md-6">
     <p><span class="why-heading font-white">Why long term?</span></p>
-    <p><span class="reason-why font-white">No, long term contract. We just want you to know that we are not a quick fix program. MyHealthStyle and its coaches are invested in you!</span></p>
+    <p><span class="reason-why font-white">No! No, long term contract. We just want you to know that we are not a quick fix program. MyHealthStyle and its coaches are invested in you!</span></p>
     <p><span class="reason-why font-white">In fact, we suggest you begin a conversation with your team for just $10 a week for the first four weeks.</span></p>
     <p><span class="reason-why font-white">Just add the code “My Team” when you sign up. You can cancel at any time. Thereafter, we have at $74 dollar a month plan. That is less than $2.50 a day.</span></p>
+    <p><span class="reason-why font-white">
+      <b>Give yourself a chance for a better today.</b>
+    </span></p>
+    <div id="learn-more-buttons second-button-group" class="text-center ">
+      <button class="btn sign-up-button"><%= link_to 'Sign Up Now', new_user_registration_path, class: "sign-up-text"%></button>
+      <button class="btn sign-up-button"><%= link_to 'Sign In', new_user_session_path, class: "sign-up-text"%></button>
+    </div>
   </div>
 </div>
 </div>
@@ -87,4 +122,12 @@
 <% if Rails.env == 'production' %>
     <script src="//load.sumome.com/" data-sumo-site-id="b086048ec9ea6218a358eab8f2cfa0e8dd277b5bd918e31755eb3e1f0522629c" async="async"></script>
 <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/rznrsm2q';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-91967448-1', 'auto');
+ga('send', 'pageview');
+</script>
 <% end %>
