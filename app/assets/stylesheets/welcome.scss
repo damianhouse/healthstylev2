@@ -88,6 +88,12 @@ div.h2 span.tagline {
 .orange-font {
   color: #FF6600;
 }
+.mail-info {
+  padding: 15px;
+}
+#fifth-button-group {
+  padding: 25px 0 0 40px;
+}
 @media (max-width: 568px) {
   #first-learn-more {
     background-image: url(reach-your-potential-mobile.jpg);
@@ -120,6 +126,34 @@ div.h2 span.tagline {
     height: 100vh;
     margin: auto;
     font-weight: normal;
+  }
+  #fourth-learn-more {
+    background-image: url(time-and-money-mobile.jpg);
+    background-repeat: no-repeat;
+    height: 100vh;
+    vertical-align: middle;
+    color: white;
+    font-weight: normal;
+    background-repeat: no-repeat;
+    background-size: 90vh auto;
+    &.learn-more {
+      padding-top: 20vh 0 0 20vh;
+      font-size: .8em;
+
+    }
+  }
+  #fifth-learn-more {
+    background-image: url(sunset-photo.jpg);
+    vertical-align: middle;
+    font-weight: normal;
+    color: white;
+    height: auto;
+    &.learn-more {
+      padding-top: 20vh 0 0 20vh;
+      font-size: .8em;
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+    }
   }
   #welcome {
     padding-bottom: 25px;
@@ -174,6 +208,27 @@ div.h2 span.tagline {
     height: 100vh;
     max-height: 800px;
     padding-top: 5%;
+  }
+  #fourth-learn-more {
+    background-image: url(time_and_money.jpg);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    margin:0;
+    padding-top: 0;
+    padding-bottom: 15px;
+    font-weight: normal;
+    height: 100vh;
+    max-height: 800px;
+    color: white;
+  }
+  #fifth-learn-more {
+    background-image: url(sparks.jpg);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    height: 100vh;
+    max-height: 800px;
+    color: white;
+    font-weight: bold;
   }
   #main-image-div {
     padding: 0;

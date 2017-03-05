@@ -51,13 +51,29 @@
 </div>
 </div>
 <div id="first-learn-more" class="text-center col-sm-12">
-  <div class="learn-more">
+  <div class="learn-more col-sm-12 col-md-6 col-md-offset-6">
     <p><span class="why-heading">Why a team of 3?</span></p>
     <p><span class="reason-why">We understand it’s not easy to reach goals. Pick your <u>Lead Coach</u> to work with you everyday, for lasting change.</span></p>
     <p><span class="reason-why">Happiness and serenity are a matter of perspective, choose a <u>Team Coach</u> to work with your heart, spirit and to find balance.</span></p>
     <p><span class="reason-why">Feeling strong and fit is a process not an event. Select your second <u>Team Coach</u> to inspire you from couch to wherever you want to go!</span></p>
     <p class="orange-font"><span class="reason-why">
       <b>We are NOT a one size fits all solution.<br>We are YOUR solution.</b>
+    </span></p>
+    <div id="learn-more-buttons second-button-group" class="text-center ">
+      <button class="btn sign-up-button"><%= link_to 'Sign Up Now', new_user_registration_path, class: "sign-up-text"%></button>
+      <button class="btn sign-up-button"><%= link_to 'Sign In', new_user_session_path, class: "sign-up-text"%></button>
+    </div>
+  </div>
+</div>
+
+<div id="third-learn-more" class="text-center col-sm-12">
+  <div class="learn-more col-sm-12 col-md-6">
+    <p><span class="why-heading font-white">Why long term?</span></p>
+    <p><span class="reason-why font-white">No! No, long term contract. We just want you to know that we are not a quick fix program. MyHealthStyle and its coaches are invested in you!</span></p>
+    <p><span class="reason-why font-white">In fact, we suggest you begin a conversation with your team for just $10 a week for the first four weeks.</span></p>
+    <p><span class="reason-why font-white">Just add the code “My Team” when you sign up. You can cancel at any time. Thereafter, we have at $74 dollar a month plan. That is less than $2.50 a day.</span></p>
+    <p><span class="reason-why font-white">
+      <b>Give yourself a chance for a better today.</b>
     </span></p>
     <div id="learn-more-buttons second-button-group" class="text-center ">
       <button class="btn sign-up-button"><%= link_to 'Sign Up Now', new_user_registration_path, class: "sign-up-text"%></button>
@@ -98,16 +114,53 @@
     </div>
   </div>
 </div>
-<div id="third-learn-more" class="text-center col-sm-12">
-  <div class="learn-more col-sm-12 col-md-6">
-    <p><span class="why-heading font-white">Why long term?</span></p>
-    <p><span class="reason-why font-white">No! No, long term contract. We just want you to know that we are not a quick fix program. MyHealthStyle and its coaches are invested in you!</span></p>
-    <p><span class="reason-why font-white">In fact, we suggest you begin a conversation with your team for just $10 a week for the first four weeks.</span></p>
-    <p><span class="reason-why font-white">Just add the code “My Team” when you sign up. You can cancel at any time. Thereafter, we have at $74 dollar a month plan. That is less than $2.50 a day.</span></p>
-    <p><span class="reason-why font-white">
-      <b>Give yourself a chance for a better today.</b>
-    </span></p>
+<div id="fourth-learn-more" class="text-center col-sm-12">
+  <div class="learn-more col-sm-12 col-md-6 col-md-offset-6">
+    <p><span class="why-heading">Save time and money!</span></p>
+    <div class="benefits-carousel">
+      <p class="font-white bold">Our coaches use RealPlansTM with you to help you shop and organize for your preferred diet.</p>
+      <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+          <!-- Wrapper for carousel items -->
+        <div class="carousel-inner">
+          <div class="item active">
+            <p class="orange-font text-center carousel-benefits bold">Vegetarian</p>
+          </div>
+          <div class="item">
+            <p class="orange-font text-center carousel-benefits bold">Traditional</p>
+          </div>
+          <div class="item">
+            <p class="orange-font text-center carousel-benefits bold">Gluten Free</p>
+          </div>
+          <div class="item">
+            <p class="orange-font text-center carousel-benefits bold">Paleo</p>
+          </div>
+          <div class="item">
+            <p class="orange-font text-center carousel-benefits bold">Dairy Free</p>
+          </div>
+          <div class="item">
+            <p class="orange-font text-center carousel-benefits bold">Allergen</p>
+          </div>
+          <div class="item">
+            <p class="orange-font text-center carousel-benefits bold">Other Specific</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p><span class="reason-why">You may or may not want to follow a specific diet, want a plan for the week and a shopping list, but hey, if you do, we got you covered.</span></p>
+    <p><span class="reason-why">You can work directly with your Lead Coach to implement your needs, then make adjustments as you progress.</span></p>
     <div id="learn-more-buttons second-button-group" class="text-center ">
+      <button class="btn sign-up-button"><%= link_to 'Sign Up Now', new_user_registration_path, class: "sign-up-text"%></button>
+      <button class="btn sign-up-button"><%= link_to 'Sign In', new_user_session_path, class: "sign-up-text"%></button>
+    </div>
+  </div>
+</div>
+<div id="fifth-learn-more" class="text-center col-sm-12">
+  <div class="learn-more col-sm-12 col-md-8">
+    <p><span class="why-heading">Corporate Wellness</span></p>
+    <p><span class="reason-why">Health, happiness, and productivity at work are related concepts, and employers have an opportunity to foster all three—to everybody’s benefit—with a corporate wellness program. We believe in a multi-disciplinary, comprehensive approach, and we deliver it with our frequent and immediate touch points.</span></p>
+    <p><span class="reason-why">Accountability and compliance happen daily, and MyHealthStyle is the only wellness company that can provide that for your employees and your bottom line. Our solutions can work independently or in combination with your current wellness programs. Request additional information at</span></p>
+    <a href="mailto:info@myhealthstyleinc.com"target="_top" class="mail-info font-white">info@myhealthstyleinc.com</a>
+    <div id="learn-more-buttons fifth-button-group" class="text-center ">
       <button class="btn sign-up-button"><%= link_to 'Sign Up Now', new_user_registration_path, class: "sign-up-text"%></button>
       <button class="btn sign-up-button"><%= link_to 'Sign In', new_user_session_path, class: "sign-up-text"%></button>
     </div>
