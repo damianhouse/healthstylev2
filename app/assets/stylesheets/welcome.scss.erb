@@ -91,21 +91,26 @@ div.h2 span.tagline {
 .mail-info {
   padding: 15px;
 }
-#fifth-button-group {
+#sign-up-button-group {
   padding: 25px 0 0 40px;
+}
+.learn-more-buttons {
+  padding: 25px;
 }
 @media (max-width: 568px) {
   #first-learn-more {
-    background-image: url(<%= asset_path 'reach-your-potential-mobile.jpg' %>);
+    background-image: url(<%= asset_path 'reach-your-potential.jpg' %>);
+    background-repeat: no-repeat;
     font-weight: normal;
     color: #FF6600;
-    height: auto;
+    background-size: auto;
     &.learn-more {
       padding-top: 20vh 0 0 20vh;
       font-size: .8em;
-      background-size: 100% auto;
-      background-repeat: no-repeat;
     }
+  }
+  .why-heading {
+    font-size: 2em !important;
   }
   #second-learn-more {
     background-image: url(<%= asset_path 'phone-on-table-mobile.jpg' %>);
@@ -125,6 +130,7 @@ div.h2 span.tagline {
     background-color: #0B090B;
     font-weight: normal;
     background-size: 100% auto;
+    height: auto;
   }
   #fourth-learn-more {
     background-image: url(<%= asset_path 'time-and-money-mobile.jpg' %>);
@@ -156,7 +162,7 @@ div.h2 span.tagline {
   }
   #welcome {
     padding-bottom: 25px;
-    height: 100vh;
+    height: auto;
   }
   #main-image-div {
     padding: 0;
